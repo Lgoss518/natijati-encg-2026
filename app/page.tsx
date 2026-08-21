@@ -117,6 +117,12 @@ export default function Home(){
     if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
     setNotifications("Notification" in window?Notification.permission:"unsupported");
   },[]);
+  useEffect(()=>{
+    let visitorId=localStorage.getItem("orientation-lgoss-visitor");
+    if(!visitorId){visitorId=crypto.randomUUID();localStorage.setItem("orientation-lgoss-visitor",visitorId)}
+    const ping=()=>fetch("/api/visit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({visitor_id:visitorId}),keepalive:true}).catch(()=>{});
+    ping();const timer=setInterval(ping,30000);return()=>clearInterval(timer);
+  },[]);
   useEffect(()=>{const tick=()=>{const distance=new Date(nextListDate).getTime()-Date.now();const safe=Math.max(0,distance);setCountdown({days:Math.floor(safe/86400000),hours:Math.floor(safe/3600000)%24,minutes:Math.floor(safe/60000)%60,seconds:Math.floor(safe/1000)%60,done:distance<=0})};tick();const timer=setInterval(tick,1000);return()=>clearInterval(timer)},[nextListDate]);
 
   async function enableNotifications(){
