@@ -6,9 +6,7 @@ const supabaseUrl = () => process.env.SUPABASE_URL || "";
 const supabaseKey = () => process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const supabaseHeaders = (): Record<string, string> => {
   const value = supabaseKey();
-  return value.startsWith("sb_secret_")
-    ? { apikey: value }
-    : { apikey: value, Authorization: `Bearer ${value}` };
+  return { apikey: value };
 };
 
 export async function GET() {
