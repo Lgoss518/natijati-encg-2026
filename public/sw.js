@@ -1,0 +1,16 @@
+self.addEventListener("install",()=>self.skipWaiting());
+self.addEventListener("activate",event=>event.waitUntil(self.clients.claim()));
+self.addEventListener("message",event=>{
+  if(event.data?.type!=="NOTIFY")return;
+  event.waitUntil(self.registration.showNotification(event.data.title,{
+    body:event.data.body,
+    icon:"/orientation-lgoss-logo.png",
+    badge:"/favicon.svg",
+    tag:event.data.tag||"orientation-lgoss-update",
+    data:{url:"/"}
+  }));
+});
+self.addEventListener("notificationclick",event=>{
+  event.notification.close();
+  event.waitUntil(clients.openWindow(event.notification.data?.url||"/"));
+});
