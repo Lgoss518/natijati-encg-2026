@@ -4,12 +4,18 @@ import staticModel from "../../../public/model.json";
 const FALLBACK = { ...staticModel, next_list_date: "2026-09-09T00:00:00+01:00", announcement: "" };
 const supabaseUrl = () => process.env.SUPABASE_URL || "";
 const supabaseKey = () => process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const supabaseHeaders = (): Record<string, string> => {
+  const value = supabaseKey();
+  return value.startsWith("sb_secret_")
+    ? { apikey: value }
+    : { apikey: value, Authorization: `Bearer ${value}` };
+};
 
 export async function GET() {
   if (!supabaseUrl() || !supabaseKey()) return Response.json(FALLBACK, { headers: { "Cache-Control": "no-store" } });
   try {
     const response = await fetch(`${supabaseUrl()}/rest/v1/site_settings?key=eq.model&select=value`, {
-      headers: { apikey: supabaseKey(), Authorization: `Bearer ${supabaseKey()}` }, cache: "no-store",
+      headers: supabaseHeaders(), cache: "no-store",
     });
     const rows = await response.json();
     return Response.json(rows?.[0]?.value || FALLBACK, { headers: { "Cache-Control": "no-store" } });
@@ -24,7 +30,7 @@ export async function POST(request: Request) {
   const updatedAt = new Date().toISOString();
   const response = await fetch(`${supabaseUrl()}/rest/v1/site_settings`, {
     method: "POST",
-    headers: { apikey: supabaseKey(), Authorization: `Bearer ${supabaseKey()}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+    headers: { ...supabaseHeaders(), "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
     body: JSON.stringify({ key: "model", value: model, updated_at: updatedAt }),
   });
   if (!response.ok) return Response.json({ error: await response.text() }, { status: 500 });
