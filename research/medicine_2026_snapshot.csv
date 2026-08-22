@@ -1,0 +1,25 @@
+network,year,phase_date,city,track,candidates_remaining,max_current_rank,choice_1,choice_2,choice_3,source_status
+FMPD,2026,2026-08-04,Agadir,Medecine,450,450,378,48,24,PDF_extracted
+FMPD,2026,2026-08-04,Agadir,Pharmacie,110,110,6,44,60,PDF_extracted
+FMPD,2026,2026-08-04,Beni Mellal,Medecine,240,240,197,32,11,PDF_extracted
+FMPD,2026,2026-08-04,Casablanca,Dentaire,190,190,45,126,19,PDF_extracted
+FMPD,2026,2026-08-04,Casablanca,Medecine,680,680,550,105,25,PDF_extracted
+FMPD,2026,2026-08-04,Casablanca,Pharmacie,220,220,11,48,161,PDF_extracted
+FMPD,2026,2026-08-04,Errachidia,Medecine,200,200,161,25,14,PDF_extracted
+FMPD,2026,2026-08-04,Fes,Dentaire,90,90,20,60,10,PDF_extracted
+FMPD,2026,2026-08-04,Fes,Medecine,650,650,558,72,20,PDF_extracted
+FMPD,2026,2026-08-04,Fes,Pharmacie,120,120,6,39,75,PDF_extracted
+FMPD,2026,2026-08-04,Guelmim,Medecine,140,140,118,16,6,PDF_extracted
+FMPD,2026,2026-08-04,Kenitra,Medecine,250,250,215,23,12,PDF_extracted
+FMPD,2026,2026-08-04,Laayoune,Medecine,250,250,223,20,7,PDF_extracted
+FMPD,2026,2026-08-04,Laayoune,Pharmacie,50,50,1,30,19,PDF_extracted
+FMPD,2026,2026-08-04,Marrakech,Medecine,650,650,547,82,21,PDF_extracted
+FMPD,2026,2026-08-04,Marrakech,Pharmacie,150,150,7,61,82,PDF_extracted
+FMPD,2026,2026-08-04,Oujda,Medecine,540,540,478,51,11,PDF_extracted
+FMPD,2026,2026-08-04,Oujda,Pharmacie,90,90,5,37,48,PDF_extracted
+FMPD,2026,2026-08-04,Rabat,Dentaire,170,170,39,121,10,PDF_extracted
+FMPD,2026,2026-08-04,Rabat,Medecine,660,660,563,77,20,PDF_extracted
+FMPD,2026,2026-08-04,Rabat,Pharmacie,240,240,10,69,161,PDF_extracted
+FMPD,2026,2026-08-04,Settat,Medecine,250,250,213,24,13,PDF_extracted
+FMPD,2026,2026-08-04,Tanger,Medecine,450,450,384,57,9,PDF_extracted
+FMPD,2026,2026-08-04,Tanger,Pharmacie,100,100,4,53,43,PDF_extracted
