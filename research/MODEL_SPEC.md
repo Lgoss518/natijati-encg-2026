@@ -1,5 +1,11 @@
 # Spécification des moteurs d'estimation
 
+## Estimations exploratoires ENSA, ENSAM et Santé
+
+En attendant de récupérer des instantanés complets et appariés au niveau candidat, le calculateur public utilise une couche exploratoire volontairement prudente. Il transforme le rang en trois horizons historiques — prudent, central et optimiste — puis applique une transition logistique autour de chaque horizon. Pour la Santé, les horizons sont proportionnels à la taille vérifiée de la liste du 4 août et diminuent lorsque la part des choix 1 est élevée. Pour ENSA et ENSAM, ils utilisent la profondeur et le calendrier des vagues complémentaires vérifiées de 2024–2025. Safi dispose d'un ancrage plus solide : sa liste régionale n°5 de 2025 a atteint le rang 300.
+
+Le niveau de confiance fait partie intégrante du résultat : 32–42 % lorsque le réseau repose surtout sur le calendrier des phases et des instantanés partiels, et 58 % pour le jalon régional vérifié de Safi. Ces niveaux et horizons devront être recalibrés dès que des fichiers avant/après comparables seront récupérés.
+
 ## Principe général
 
 La plateforme ne doit jamais présenter une probabilité comme officielle. Chaque résultat doit contenir :
