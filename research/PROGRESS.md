@@ -59,6 +59,13 @@
 - Répartition utile pour le modèle : informatique = 4 448 places; management = 3 923; électrique/industriel = 2 309; agro/biologie = 1 501; environnement/procédés/mines = 923; génie civil = 424; mécanique = 347; instrumentation = 140.
 - Le calculateur peut désormais appliquer automatiquement le bon facteur à partir du bac et de la filière, puis utiliser la capacité exacte du couple ville-filière. Il manque encore les distributions de scores/cutoffs historiques pour transformer ce score en probabilité calibrée.
 
+### Comparaison FST 2025–2026
+
+- La répartition officielle 2025 (11 170 places) a été structurée et validée dans `fst_2025_seats.csv`.
+- L'augmentation 2026 est de 280 places (+2,51 %), mais elle est très concentrée : GI +200 (+8,77 %), GMSI +30 (+3,85 %), MSD +30 (+2,86 %) et GESE +20 (+1,77 %). GB, GEG, GP et GC restent stables.
+- Deux nouvelles implantations apparaissent dans la ventilation 2026 : Taourirt (100 places GI) et Guelmim (120 GI + 60 MSD). En parallèle, Settat GI passe de 460 à 440, Fès MSD de 150 à 100, tandis que Fès GMSI passe de 220 à 250 et GESE de 110 à 130.
+- Conséquence modèle : une amélioration globale uniforme serait incorrecte. L'effet capacité doit être appliqué au couple ville-filière; la pression pourrait diminuer davantage pour GI à Guelmim/Taourirt, tout en pouvant rester stable ou augmenter à Settat.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
