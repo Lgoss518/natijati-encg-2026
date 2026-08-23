@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "ORIENTATION LGOSS | منصة تقدير فرص القبول",
   description: "منصة تفاعلية لتقدير فرص القبول في ENCG وENSA وENSAM وكليات الصحة وFST وEST.",
   keywords: ["Orientation LGOSS", "orientation Maroc", "ENCG", "ENSA", "ENSAM", "médecine Maroc", "FST", "EST", "listes d'attente 2026"],
-  verification: { google: "ZpJi5KOI7m9lfwmULDojtbC7fp9s7dXc9hrEORVR74g" },
+  verification: { google: "8Okmg8KZOwkglVL0GwsA6FOit8LBLo4Q3zbaXb0XGAc" },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   openGraph: {
