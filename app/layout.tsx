@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://orientation-lgoss.vercel.app"),
   title: "ORIENTATION LGOSS | منصة تقدير فرص القبول",
   description: "منصة تفاعلية لتقدير فرص القبول في ENCG وENSA وENSAM وكليات الصحة وFST وEST.",
+  keywords: ["Orientation LGOSS", "orientation Maroc", "ENCG", "ENSA", "ENSAM", "médecine Maroc", "FST", "EST", "listes d'attente 2026"],
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   openGraph: {
     title: "ORIENTATION LGOSS | منصة التوجيه والقبول",
     description: "حسب فرصتك في مدارس التجارة والهندسة والصحة والعلوم والتكنولوجيا.",
@@ -31,7 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body>{children}</body>
+      <body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Orientation LGOSS",
+        alternateName: "ORIENTATION LGOSS",
+        url: "https://orientation-lgoss.vercel.app/",
+        description: "منصة مغربية لتقدير فرص القبول والتوجيه بعد البكالوريا.",
+        inLanguage: ["ar-MA", "fr-MA"],
+      }) }} /></body>
     </html>
   );
 }
