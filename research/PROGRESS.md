@@ -52,6 +52,13 @@
 - La prochaine sous-étape consiste à rattacher chaque intitulé exact des nombreuses filières EST à sa famille de pondération, puis à transcrire les places par filière et ville. Ce rattachement sera vérifié par somme contre la capacité de chaque établissement.
 - Une recherche ciblée des seuils 2025 n'a pas trouvé de tableau national officiel : Cursussup communique les propositions dans l'espace personnel et les établissements publient surtout les procédures/listes d'inscription. Il ne faudra donc pas présenter des « seuils nationaux » inventés. Les seuils historiques devront être reconstruits à partir des derniers admis/listes locales, ou alimentés par des résultats utilisateurs vérifiés.
 
+### Catalogue EST 2026 terminé
+
+- Les 185 combinaisons établissement-filière ont été transcrites dans `est_2026_programs.csv`, avec le nombre de places et la famille de pondération correspondante.
+- Contrôle d'intégrité réussi : chaque somme par établissement correspond à la note ministérielle et le total des 185 lignes est exactement 14 015.
+- Répartition utile pour le modèle : informatique = 4 448 places; management = 3 923; électrique/industriel = 2 309; agro/biologie = 1 501; environnement/procédés/mines = 923; génie civil = 424; mécanique = 347; instrumentation = 140.
+- Le calculateur peut désormais appliquer automatiquement le bon facteur à partir du bac et de la filière, puis utiliser la capacité exacte du couple ville-filière. Il manque encore les distributions de scores/cutoffs historiques pour transformer ce score en probabilité calibrée.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.

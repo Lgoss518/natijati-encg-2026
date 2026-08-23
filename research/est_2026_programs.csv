@@ -1,0 +1,186 @@
+city,program,seats,weight_group
+Safi,Qualité Hygiène Sécurité et Environnement,60,environment_process_mining
+Safi,Instrumentation et Mesures Physico-Chimiques,60,instrumentation
+Safi,Génie Electrique et Systèmes Automatisés,60,electrical_industrial
+Safi,Génie Industriel et Maintenance,60,electrical_industrial
+Safi,Génie Informatique,180,it
+Safi,Techniques de Management,200,management
+Safi,Énergie Durable et Hydrogène Vert,40,electrical_industrial
+Agadir,Conception et Développement de Logiciel,120,it
+Agadir,Entrepreneuriat Digital et Communication,140,management
+Agadir,Génie Agroalimentaire,120,agro_bio
+Agadir,Génie Biomédical,60,agro_bio
+Agadir,Génie Electrique et Maintenance,70,electrical_industrial
+Agadir,Génie Electrique-Systèmes Automatisés,70,electrical_industrial
+Agadir,Systèmes Réseaux et Télécommunications,60,it
+Agadir,Ingénierie des Données,100,it
+Agadir,Marketing Digital et Expérience Utilisateur,60,management
+Agadir,Techniques de Management,200,management
+Dakhla,Génie Electrique,60,electrical_industrial
+Dakhla,Génie des Procédés Alimentaires,60,agro_bio
+Dakhla,Marketing Digital et Expérience Utilisateur,70,management
+Dakhla,Ingénierie des Données,60,it
+Dakhla,Informatique de Gestion,70,it
+Dakhla,Gestion des Réseaux et Sécurité,60,it
+Dakhla,Conception et Développement de Logiciel,60,it
+Dakhla,Informatique et Gestion des Organisations,70,management
+Casablanca,Banque Finance Assurance,100,management
+Casablanca,E-Business et Management,100,management
+Casablanca,Génie des Procédés Industriels,131,environment_process_mining
+Casablanca,Génie Electrique,125,electrical_industrial
+Casablanca,Génie Informatique,139,it
+Casablanca,Génie Mécanique et Productique,125,mechanical
+Casablanca,Gestion Financière et Comptable,100,management
+Casablanca,Management Digital des Organisations,100,management
+Essaouira,Énergies Renouvelables,70,electrical_industrial
+Essaouira,Génie de l'Environnement,70,environment_process_mining
+Essaouira,Génie Informatique,70,it
+Essaouira,Informatique Décisionnelle et Science de Données,70,it
+Essaouira,Management du Tourisme,110,management
+Essaouira,Techniques de Management,110,management
+Laayoune,Informatique et Gestion des Entreprises,60,management
+Laayoune,Conception et Développement des Logiciels,60,it
+Laayoune,Sciences des Données et Intelligence Artificielle,60,it
+Laayoune,Médias et Production du Contenu Numérique,60,it
+Laayoune,Marketing Digital et Expérience Utilisateur,60,management
+Laayoune,Management Juridique et Financier,60,management
+Laayoune,Génie Biologique,60,agro_bio
+Laayoune,Génie Civil,60,civil
+Laayoune,Réseaux et Cybersécurité,60,it
+Laayoune,Génie Biomédical et Bioinformatique,60,agro_bio
+Laayoune,Intelligence d'Affaires et Transformation Numérique,60,management
+Fquih Ben Salah,Agrochimie,80,agro_bio
+Fquih Ben Salah,Agro-énergie,70,agro_bio
+Fquih Ben Salah,Chimie et Techniques d'Analyse,80,environment_process_mining
+Fquih Ben Salah,Génie Biologique et Amélioration de la Production Animale,80,agro_bio
+Fquih Ben Salah,Génie Civil,80,civil
+Fquih Ben Salah,Génie Informatique,130,it
+Fquih Ben Salah,Génie Minier,80,environment_process_mining
+Fquih Ben Salah,Géométallurgie et Géotechnique Minière,80,environment_process_mining
+Fquih Ben Salah,Gestion et Technologies de l'Eau,70,agro_bio
+Fquih Ben Salah,Industries Agroalimentaires,80,agro_bio
+Fquih Ben Salah,Informatique Décisionnelle et Statistiques,130,it
+Kenitra,Génie Electrique et Systèmes Industriels,60,electrical_industrial
+Kenitra,Génie Industriel et Logistique,65,electrical_industrial
+Kenitra,Génie Logiciel,60,it
+Kenitra,Ingénierie Informatique et Sciences des Données,60,it
+Kenitra,Informatique Industrielle et Robotique,60,electrical_industrial
+Kenitra,Infrastructure Digitale Réseau et Sécurité,60,it
+Kenitra,Systèmes Embarqués pour l'Automobile,60,electrical_industrial
+Kenitra,Techniques de Management,65,management
+Kenitra,Technologies Agroalimentaires,55,agro_bio
+Nador,Développement d'Applications Web et Mobile,60,it
+Nador,Finance Banque et Transformation Digitale,50,management
+Nador,Génie Civil-Construction Durable,40,civil
+Nador,Génie de l'Eau et de l'Environnement,40,agro_bio
+Nador,Génie Industriel 4.0 et Techniques Avancées de la Maintenance,40,electrical_industrial
+Nador,Informatique Décisionnelle et Sciences des Données,60,it
+Nador,Ingénierie Logicielle et Cybersécurité,60,it
+Nador,Intelligence Artificielle et Ingénierie des Données,60,it
+Nador,Management Logistique et Transport,50,management
+Nador,Marketing et Gestion des Projets Digitaux Innovants,60,management
+Nador,Réseaux et Télécommunication,40,it
+Nador,Web Marketing,60,management
+Beni Mellal,Sécurité Informatique et Réseaux,110,it
+Beni Mellal,Agro-industrie,80,agro_bio
+Beni Mellal,Génie des Procédés,80,environment_process_mining
+Beni Mellal,Génie Electrique Énergies Renouvelables et Efficacité Énergétique,60,electrical_industrial
+Beni Mellal,Génie Industriel et Maintenance,80,electrical_industrial
+Beni Mellal,Génie Informatique,110,it
+Beni Mellal,Génie Mécatronique et Automobile,80,electrical_industrial
+Beni Mellal,Ingénierie des Données et Intelligence Artificielle,110,it
+Beni Mellal,Management Logistique et Transport,120,management
+Beni Mellal,Métrologie Industrielle et Contrôle Qualité,80,instrumentation
+Khenifra,Laboratoires des Bioanalyses et Contrôle,40,agro_bio
+Khenifra,Biotechnologie Végétale,40,agro_bio
+Khenifra,Génie de l'Environnement,70,environment_process_mining
+Khenifra,Génie des Mines et de l'Environnement,40,environment_process_mining
+Khenifra,Génie Thermique et Énergies Renouvelables,50,electrical_industrial
+Khenifra,Ingénierie des Données et Intelligence Artificielle,70,it
+Khenifra,Ingénierie Logicielle et Réseaux,90,it
+Khenifra,Management des Ressources Humaines,70,management
+Khenifra,Techniques de Commercialisation et de Communication,70,management
+Khenifra,Technologies Agroalimentaires,40,agro_bio
+Sale,Génie de l'Eau et de l'Environnement,66,agro_bio
+Sale,Construction Durable et Efficacité Énergétique,68,civil
+Sale,Génie Bio-Industriel,68,agro_bio
+Sale,Génie Civil,66,civil
+Sale,Génie Electrique et Informatique Industrielle,90,electrical_industrial
+Sale,Génie Industriel,88,electrical_industrial
+Sale,Génie Informatique,78,it
+Sale,Management et Événementiel Durable du Sport,40,management
+Sale,Marketing Digital et Commercial,120,management
+Sale,Systèmes Embarqués Industriels,40,electrical_industrial
+Sale,Systèmes Informatiques et Décisionnels,36,it
+Sale,Systèmes Informatiques et Réseaux,30,it
+Sale,Techniques de Management,120,management
+Sidi Bennour,Génie Agro-environnement,60,agro_bio
+Sidi Bennour,Génie Équin,40,environment_process_mining
+Sidi Bennour,Équipements et Techniques de Dessalement des Eaux,40,agro_bio
+Sidi Bennour,Génie Informatique,80,it
+Sidi Bennour,Techniques de Management,60,management
+Fes,Agroalimentaire et Bioprocédés,72,agro_bio
+Fes,Génie des Procédés,72,environment_process_mining
+Fes,Génie Electrique,72,electrical_industrial
+Fes,Génie Industriel et Maintenance,72,electrical_industrial
+Fes,Gestion des Réseaux et Sécurité,75,it
+Fes,Génie Mécanique et Productique,72,mechanical
+Fes,Génie Thermique et Énergie,72,electrical_industrial
+Fes,Gestion des Ressources Humaines,72,management
+Fes,Gestion Logistique et Transport,72,management
+Fes,Ingénierie des Données,75,it
+Fes,Ingénierie Logicielle,75,it
+Fes,Systèmes Embarqués,75,electrical_industrial
+Fes,Techniques de Gestion Commerciale,72,management
+Fes,Techniques de Management,72,management
+Kelaat Sraghna,Génie Agroalimentaire,60,agro_bio
+Kelaat Sraghna,Génie de l'Environnement,60,environment_process_mining
+Kelaat Sraghna,Génie de Production Végétale et Animale,60,agro_bio
+Kelaat Sraghna,Ingénierie des Données,90,it
+Kelaat Sraghna,Management et Gestion des Entreprises,90,management
+Kelaat Sraghna,Génie Énergétique et Thermique,60,electrical_industrial
+Kelaat Sraghna,Réseaux Cybersécurité et Intelligence Artificielle,90,it
+Guelmim,Énergies Renouvelables et Efficacité Énergétique,100,electrical_industrial
+Guelmim,Génie Electrique,100,electrical_industrial
+Guelmim,Génie Informatique,90,it
+Guelmim,Ingénierie des Données,90,it
+Guelmim,Réseaux Informatiques et Sécurité,90,it
+Guelmim,Techniques de Management,100,management
+Meknes,Génie Electrique et Technologies Émergentes,100,electrical_industrial
+Meknes,Génie Thermique et Énergétique,80,electrical_industrial
+Meknes,Génie Civil,60,civil
+Meknes,Génie Informatique,120,it
+Meknes,Techniques de Commercialisation et de Communication,160,management
+Meknes,Techniques de Management,200,management
+Meknes,Finance Banque et Assurance,120,management
+Meknes,Développement Web et Multimédia,50,it
+Meknes,Intelligence Artificielle et Technologies Émergentes,50,it
+Meknes,Publicité et Marketing Digital,100,management
+Oujda,Conception et Développement des Logiciels,80,it
+Oujda,Conception et Prototypage Industriel,50,electrical_industrial
+Oujda,Électrotechnique et Énergie Renouvelable,50,electrical_industrial
+Oujda,Génie Électronique Informatique Industrielle et Robotique,50,electrical_industrial
+Oujda,Finance Comptabilité et Fiscalité,40,management
+Oujda,Génie Civil et Efficacité Énergétique,50,civil
+Oujda,Génie Informatique Embarquée,80,it
+Oujda,Génie Mécanique et Productique,50,mechanical
+Oujda,Génie Mécatronique,50,electrical_industrial
+Oujda,Gestion des Réseaux et Sécurité,80,it
+Oujda,Informatique Décisionnelle et Intelligence Artificielle,80,it
+Oujda,Informatique et Gestion des Entreprises,40,management
+Oujda,Management Logistique et Technologies Numériques,50,management
+Oujda,Marketing et E-Commerce,40,management
+Oujda,Systèmes d'Information et Ingénierie de Données,80,it
+Oujda,Technologie Automobile,50,electrical_industrial
+Oujda,Web Design et Marketing Digital,80,management
+Ouarzazate,Gestion des Réseaux et Sécurité,60,it
+Ouarzazate,Ingénierie des Données,60,it
+Ouarzazate,Conception et Développement Logiciel,70,it
+Ouarzazate,Marketing Digital et Expérience Utilisateur,70,management
+Tetouan,Industrie Navale Systèmes Électriques et Maintenance,100,mechanical
+Tetouan,Intelligence Artificielle,100,it
+Tetouan,Cybersécurité et Audit des Systèmes d'Information,100,it
+Tetouan,Informatique et Développement Digital,100,it
+Al Hoceima,Logistique et Transport,60,management
+Al Hoceima,Économie Bleue et Valorisation des Produits de la Mer,60,environment_process_mining
+Taounate,Bio-industrie Cosmétiques et Compléments Alimentaires,40,agro_bio
