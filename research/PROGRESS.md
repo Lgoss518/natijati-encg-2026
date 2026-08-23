@@ -111,6 +111,14 @@
 - Pour remplir les vacances annoncées, les listes ont donc atteint au minimum 16,12 positions par place en GI, 22,23 en GE et 21,46 en GP. La variation entre filières justifie un paramètre d'attrition spécifique plutôt qu'un multiplicateur EST unique.
 - Les doublons présents dans les PDF d'admis sont conservés comme anomalie source mais exclus des statistiques individuelles. Le calculateur ne devra jamais compter deux fois un même Code Massar.
 
+### Backtest complet des huit filières EST Casablanca
+
+- Les cinq dernières filières ont été croisées à leur tour; les huit filières de l'établissement sont maintenant couvertes par la même méthode reproductible.
+- Génie Mécanique présente un mouvement beaucoup plus compact : 25 admis uniques, médiane 63 et maximum 162 pour 25 vacances. À l'opposé, Banque Finance Assurance atteint le rang 1 635, Management Digital des Organisations 1 519 et E-Business et Management 1 544.
+- Gestion Financière et Comptable n'avait que deux vacances tardives; les deux admis étaient initialement classés aux rangs 10 et 16. Cet échantillon est trop petit pour calibrer une distribution robuste.
+- Les ratios minimaux de positions explorées par place annoncée vont de 6,48 en Génie Mécanique à plus de 50 en MDO/EBM. Ce contraste confirme que la capacité seule ne prédit pas le mouvement; la popularité, les recouvrements de candidatures et le taux de présence diffèrent fortement par famille.
+- Pour l'interface, une estimation devra afficher une largeur d'incertitude plus grande lorsque l'échantillon historique est faible (cas GFC) ou lorsque la liste d'admis publiée ne couvre pas toutes les vacances annoncées (BFA et EBM).
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
