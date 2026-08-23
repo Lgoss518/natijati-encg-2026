@@ -120,7 +120,7 @@ export default function Home(){
   const [liveSchools,setLiveSchools]=useState(schools); const [modelVersion,setModelVersion]=useState("2026.08.04");
   const [nextListDate,setNextListDate]=useState("2026-09-09T00:00:00+01:00"); const [announcement,setAnnouncement]=useState("");
   const [countdown,setCountdown]=useState({days:0,hours:0,minutes:0,seconds:0,done:false});
-  const [notifications,setNotifications]=useState<NotificationPermission|"unsupported">("default"); const versionRef=useRef("");
+  const [notifications,setNotifications]=useState<NotificationPermission|"unsupported">("default"); const versionRef=useRef(""); const notificationRef=useRef("");
   const [sortMode,setSortMode]=useState<"movement"|"easy"|"seats">("movement");
   const [compareA,setCompareA]=useState("kenitra"); const [compareB,setCompareB]=useState("settat");
   const [compareRank,setCompareRank]=useState(570); const [compareChoice,setCompareChoice]=useState(1);
@@ -132,11 +132,15 @@ export default function Home(){
     let active=true;
     const refresh=()=>fetch(`/api/model?t=${Date.now()}`,{cache:"no-store"}).then(async r=>r.ok?r.json():Promise.reject()).catch(()=>fetch(`/model.json?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.json())).then(model=>{
       if(!active)return;
-      if(versionRef.current&&versionRef.current!==model.version&&Notification.permission==="granted")navigator.serviceWorker?.ready.then(reg=>reg.active?.postMessage({type:"NOTIFY",title:"ORIENTATION LGOSS",body:fr?"Les estimations ENCG viennent d’être actualisées.":"تحدّثات توقعات ENCG دابا.",tag:`model-${model.version}`}));
+      const notificationId=model.notification?.id||"";
+      if(notificationId&&!notificationRef.current){notificationRef.current=notificationId}
+      if(notificationId&&notificationRef.current&&notificationRef.current!==notificationId&&Notification.permission==="granted")navigator.serviceWorker?.ready.then(reg=>reg.active?.postMessage({type:"NOTIFY",title:"ORIENTATION LGOSS",body:model.notification?.body||model.announcement||(fr?"Une nouvelle mise à jour est disponible.":"كاين تحديث جديد فالموقع."),tag:`broadcast-${notificationId}`}));
+      if(notificationId)notificationRef.current=notificationId;
+      if(versionRef.current&&versionRef.current!==model.version&&Notification.permission==="granted"&&!notificationId)navigator.serviceWorker?.ready.then(reg=>reg.active?.postMessage({type:"NOTIFY",title:"ORIENTATION LGOSS",body:fr?"Les estimations viennent d’être actualisées.":"تحدّثات التوقعات دابا.",tag:`model-${model.version}`}));
       versionRef.current=model.version||"2026.08.04";setModelVersion(versionRef.current);setNextListDate(model.next_list_date||"2026-09-09T00:00:00+01:00");setAnnouncement(model.announcement||"");
       setLiveSchools(schools.map(s=>({...s,...(model.schools?.[s.key]||{})})));
     }).catch(()=>{});
-    refresh(); const timer=setInterval(refresh,300000);
+    refresh(); const timer=setInterval(refresh,15000);
     return()=>{active=false;clearInterval(timer)};
   },[fr]);
 
