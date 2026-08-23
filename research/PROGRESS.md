@@ -44,6 +44,13 @@
 - Calendrier officiel FST/EST 2026 : liste principale le 31/08, inscriptions du 02 au 04/09, amélioration et liste d'attente 1 le 07/09, inscriptions de cette phase du 08 au 10/09.
 - ENSAM 2026 : la page publique confirme la liste principale du 27/07 et la liste d'attente 1 du 04/08, mais ne publie pas les PDF de rangs. Le rang saisi par l'utilisateur restera donc la donnée courante de référence; la calibration historique aura une incertitude supérieure à ENCG tant que les listes 2026 ne sont pas récupérées.
 
+### EST 2026 : capacité et pondération
+
+- La capacité officielle de 14 015 places a été transcrite pour les 22 EST dans `est_2026_capacity_by_city.csv`; la somme des établissements a été recalculée et correspond exactement au total ministériel.
+- Les deux pages complètes de l'annexe 2 sur la pondération ont été récupérées. Huit familles de filières ont été identifiées : management, informatique, électrique/industriel, mécanique, environnement/procédés/mines, agro/biologie, génie civil et instrumentation.
+- Les coefficients par série de bac et famille sont structurés dans `est_2026_weighting_groups.csv`. Exemples contrôlés : filières informatiques = 1,5 pour SMA/SMB et 1,3 pour PC; filières électriques/industrielles = 1,5 pour STE, 1,4 pour STM/SMA/SMB et 1,3 pour PC; filières agro/biologie = 1,4 pour PC et 1,2 pour SVT/agricole.
+- La prochaine sous-étape consiste à rattacher chaque intitulé exact des nombreuses filières EST à sa famille de pondération, puis à transcrire les places par filière et ville. Ce rattachement sera vérifié par somme contre la capacité de chaque établissement.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
