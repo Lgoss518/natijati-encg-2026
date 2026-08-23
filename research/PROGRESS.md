@@ -82,6 +82,13 @@
 - À Salé, le total chiffré passe de 209 places le 22/09 à 159 le 01/10, mais certaines filières peuvent recréer des vacances entre deux appels (désistement, amélioration ou non-inscription). On ne peut donc pas assimiler mécaniquement la différence entre deux snapshots au nombre d'admis.
 - Conclusion modèle : les listes complémentaires tardives constituent une composante majeure du mouvement EST. Une probabilité « finale » doit avoir un horizon explicite (prochaine liste, fin septembre ou clôture), et le modèle doit distinguer places initiales, places vacantes observées et nombre de candidats convoqués.
 
+### Vérité terrain FST 2025 : places vacantes tardives
+
+- Quinze observations chiffrées ont été structurées dans `fst_2025_late_vacancies.csv` pour Tanger et Al Hoceima. Elles proviennent des annonces de listes complémentaires publiées après la phase 2 nationale.
+- Tanger annonçait encore 301 places vacantes le 25/09/2025 sur six troncs communs, soit 18,8 % de sa capacité annuelle de 1 600 places. Le Génie Informatique concentrait à lui seul 128 places vacantes sur une capacité initiale de 300 (42,7 %).
+- Al Hoceima annonçait 87 places sur six troncs le 23/09, puis une seconde liste le 08/10 avec encore 46 places sur trois troncs. Comme pour EST, une nouvelle vacance peut apparaître après un appel; les snapshots successifs ne représentent donc pas un simple stock décroissant.
+- Cette preuve invalide une estimation basée uniquement sur le taux de remplissage de la liste principale. Pour FST, le modèle devra produire séparément une chance pour la prochaine phase nationale et une chance finale incluant les appels locaux de fin septembre/octobre.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
