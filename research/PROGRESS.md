@@ -89,6 +89,13 @@
 - Al Hoceima annonçait 87 places sur six troncs le 23/09, puis une seconde liste le 08/10 avec encore 46 places sur trois troncs. Comme pour EST, une nouvelle vacance peut apparaître après un appel; les snapshots successifs ne représentent donc pas un simple stock décroissant.
 - Cette preuve invalide une estimation basée uniquement sur le taux de remplissage de la liste principale. Pour FST, le modèle devra produire séparément une chance pour la prochaine phase nationale et une chance finale incluant les appels locaux de fin septembre/octobre.
 
+### Profondeur des listes EST Casablanca 2025
+
+- Les huit listes d'attente initiales officielles de l'EST Casablanca ont été retrouvées et leurs derniers numéros d'ordre contrôlés. Le fichier `est_casablanca_2025_waitlist_depth.csv` rapproche la taille du vivier, la capacité initiale et les places encore vacantes annoncées le 24/09.
+- Les viviers sont très différents selon la filière : Génie des Procédés 2 902 candidats, Génie Informatique 2 848, Génie Electrique 2 265, contre seulement 763 en Génie Mécanique et 210 en Gestion Financière et Comptable.
+- La taille brute de la liste ne mesure pas le nombre de concurrents réels : les mêmes candidats figurent dans plusieurs filières et établissements. Exemple révélateur : malgré 2 848 personnes listées pour 139 places en Génie Informatique, 90 places étaient encore déclarées vacantes le 24/09. Cela confirme un taux massif de doublons, de choix préférés ailleurs et de non-confirmations.
+- Conséquence modèle : `rang / capacité` serait extrêmement pessimiste. Il faut estimer un taux d'activation du vivier par filière et par phase, puis dédupliquer/pondérer avec l'ordre de choix lorsque cette information existe. La liste complète sert de bassin de risque, pas de file d'attente pure.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
