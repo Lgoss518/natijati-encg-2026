@@ -11,14 +11,24 @@ type Lang = "ar" | "fr";
 type Network = "encg" | "est" | "fst" | "ensa" | "ensam" | "health" | "ens";
 
 const networks: Array<{ key: Network; icon: string; ar: string; fr: string; arHint: string; frHint: string }> = [
-  { key:"encg", icon:"▦", ar:"ENCG", fr:"ENCG", arHint:"التجارة والتسيير", frHint:"Commerce & gestion" },
-  { key:"ensa", icon:"△", ar:"ENSA", fr:"ENSA", arHint:"العلوم التطبيقية", frHint:"Sciences appliquées" },
-  { key:"ensam", icon:"◇", ar:"ENSAM", fr:"ENSAM", arHint:"الفنون والمهن", frHint:"Arts & métiers" },
-  { key:"health", icon:"＋", ar:"الصحة", fr:"Santé", arHint:"طب، صيدلة وأسنان", frHint:"Médecine, pharmacie, dentaire" },
-  { key:"ens", icon:"□", ar:"ENS", fr:"ENS", arHint:"التربية والتكوين", frHint:"Éducation & enseignement" },
-  { key:"fst", icon:"⌁", ar:"FST", fr:"FST", arHint:"العلوم والتقنيات", frHint:"Sciences & techniques" },
-  { key:"est", icon:"○", ar:"EST", fr:"EST", arHint:"التكنولوجيا", frHint:"Technologie" },
+  { key:"encg", icon:"↗", ar:"ENCG", fr:"ENCG", arHint:"التجارة والتسيير", frHint:"Commerce & gestion" },
+  { key:"ensa", icon:"⌂", ar:"ENSA", fr:"ENSA", arHint:"العلوم التطبيقية", frHint:"Sciences appliquées" },
+  { key:"ensam", icon:"⚙", ar:"ENSAM", fr:"ENSAM", arHint:"الفنون والمهن", frHint:"Arts & métiers" },
+  { key:"health", icon:"✚", ar:"الصحة", fr:"Santé", arHint:"طب، صيدلة وأسنان", frHint:"Médecine, pharmacie, dentaire" },
+  { key:"ens", icon:"✎", ar:"ENS", fr:"ENS", arHint:"التربية والتكوين", frHint:"Éducation & enseignement" },
+  { key:"fst", icon:"∑", ar:"FST", fr:"FST", arHint:"العلوم والتقنيات", frHint:"Sciences & techniques" },
+  { key:"est", icon:"⌘", ar:"EST", fr:"EST", arHint:"التكنولوجيا", frHint:"Technologie" },
 ];
+
+const networkGuides: Record<Network, { arTitle:string; frTitle:string; arInput:string; frInput:string; arOutput:string; frOutput:string; arTip:string; frTip:string }> = {
+  encg: { arTitle:"ENCG", frTitle:"ENCG", arInput:"Code Massar أو الرتبة، المدينة وترتيب الاختيار.", frInput:"Code Massar ou rang, ville et ordre du choix.", arOutput:"نسبة القبول، اللائحة الجاية، النهائي المتوقع والمنافسين الحقيقيين.", frOutput:"Chance d’admission, prochaine liste, final estimé et concurrents réels.", arTip:"الأفضل تستعمل Code Massar إلا كان عندك.", frTip:"Le Code Massar donne le résultat le plus confortable." },
+  ensa: { arTitle:"ENSA", frTitle:"ENSA", arInput:"المدينة، الرتبة ديال 4 غشت وترتيب الاختيار.", frInput:"Ville, rang du 4 août et ordre du choix.", arOutput:"فرصة اللائحة الجاية، final estimé وثلاثة سيناريوهات.", frOutput:"Prochaine liste, final estimé et trois scénarios.", arTip:"استعمل الرتبة الحالية من Cursussup.", frTip:"Utilisez le rang actuel affiché sur Cursussup." },
+  ensam: { arTitle:"ENSAM", frTitle:"ENSAM", arInput:"المدينة، الرتبة وترتيب الاختيار.", frInput:"Ville, rang et ordre du choix.", arOutput:"تقدير القبول النهائي وحركة اللوائح.", frOutput:"Estimation finale et mouvement des listes.", arTip:"Meknès عندها معطيات أقوى حالياً.", frTip:"Meknès dispose d’un repère plus solide actuellement." },
+  health: { arTitle:"Médecine / Pharmacie / Dentaire", frTitle:"Médecine / Pharmacie / Dentaire", arInput:"المدينة، الشعبة والرتبة ديال 4 غشت.", frInput:"Ville, filière et rang du 4 août.", arOutput:"نسبة القبول، stock restant، choix 1، prochaine liste وfinal estimé.", frOutput:"Admission, stock restant, choix 1, prochaine liste et final estimé.", arTip:"هنا المعطيات أقوى حيث كاينة لوائح 4 غشت.", frTip:"Les données sont plus solides grâce aux listes du 4 août." },
+  ens: { arTitle:"ENS", frTitle:"ENS", arInput:"شعبة الباك، الوطني، الجهوي، المدينة والمسلك.", frInput:"Série du bac, national, régional, ville et filière.", arOutput:"Score pondéré، présélection والنهائي المتوقع.", frOutput:"Score pondéré, présélection et final estimé.", arTip:"النهائي مرتبط بالشفوي، لذلك النسبة تقديرية.", frTip:"Le final dépend de l’oral, la probabilité reste estimative." },
+  fst: { arTitle:"FST", frTitle:"FST", arInput:"شعبة الباك، نقط الوطني/الجهوي، المدينة والجذع المشترك.", frInput:"Série du bac, notes national/régional, ville et tronc commun.", arOutput:"Score pondéré، liste principale، attente وfinal estimé.", frOutput:"Score pondéré, liste principale, attente et final estimé.", arTip:"بدل الجذع المشترك وقارن النتيجة.", frTip:"Changez de tronc commun pour comparer." },
+  est: { arTitle:"EST", frTitle:"EST", arInput:"شعبة الباك، النقط، المدينة والفilière.", frInput:"Série du bac, notes, ville et filière.", arOutput:"Score pondéré، المقاعد، liste principale، attente وfinal estimé.", frOutput:"Score pondéré, places, liste principale, attente et final estimé.", arTip:"الفilières ماشي كلها بنفس الصعوبة.", frTip:"Toutes les filières n’ont pas la même pression." },
+};
 
 const schools: School[] = [
   {key:"kenitra",name:"ENCG القنيطرة",low:620,mid:660,high:720,seats:450},
@@ -116,6 +126,7 @@ export default function Home(){
   const [compareRank,setCompareRank]=useState(570); const [compareChoice,setCompareChoice]=useState(1);
   const [error,setError]=useState(""); const school=liveSchools.find(s=>s.key===schoolKey)!;
   const schoolName=(s:School)=>fr?frenchSchools[s.key]:s.name;
+  const guide=networkGuides[network];
 
   useEffect(()=>{
     let active=true;
@@ -172,7 +183,13 @@ export default function Home(){
     {!entered&&<div className="language-overlay" dir={lang==="fr"?"ltr":"rtl"}>{!lang?<div className="language-card"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>BIENVENUE • مرحباً</span><h1>Choisissez votre langue</h1><p>اختار اللغة باش تبدا المحاكاة</p><div><button onClick={()=>setLang("ar")} dir="rtl"><b>العربية</b><small>استمر بالعربية</small><i>←</i></button><button onClick={()=>setLang("fr")} dir="ltr"><b>Français</b><small>Continuer en français</small><i>→</i></button></div></div>:<div className="language-card school-choice-card"><button className="onboarding-back" onClick={()=>setLang(null)} aria-label={fr?"Retour":"رجوع"}>{fr?"← Retour":"رجوع →"}</button><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>{fr?"ÉTAPE 2 SUR 2":"المرحلة 2 من 2"}</span><h1>{fr?"Quelle école vous intéresse ?":"شنو هي المدرسة اللي كتهتم بها؟"}</h1><p>{fr?"Le site s’ouvrira directement avec les informations et le simulateur adaptés.":"الموقع غادي يتحل مباشرة بالمعلومات والمحاكي المناسب لاختيارك."}</p><div className="school-choice-grid">{networks.map(item=><button key={item.key} onClick={()=>{setNetwork(item.key);setEntered(true)}}><i>{item.icon}</i><b>{fr?item.fr:item.ar}</b><small>{fr?item.frHint:item.arHint}</small><em>{fr?"Ouvrir →":"فتح ←"}</em></button>)}</div></div>}</div>}
     <div className="site-content" aria-hidden={!entered}>
       <header className="nav"><a className="brand brand-image" href="#"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></a><nav><a href="#simulator">{t.navSim}</a><a href="#schools">{t.navSchools}</a><a href="#method">{t.navMethod}</a></nav><button className="language-switch" onClick={()=>setLang(fr?"ar":"fr")}>{fr?"العربية":"FR"}</button><div className="nav-note"><i/> {t.updated}</div></header>
-      <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{networks.map(item=><button key={item.key} className={network===item.key?"active":""} onClick={()=>setNetwork(item.key)}><b>{fr?item.fr:item.ar}</b><small>{item.key==="est"||item.key==="fst"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
+      <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{networks.map(item=><button key={item.key} className={network===item.key?"active":""} onClick={()=>setNetwork(item.key)}><i>{item.icon}</i><b>{fr?item.fr:item.ar}</b><small>{item.key==="est"||item.key==="fst"||item.key==="ens"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
+      <section className="quick-guide" aria-label={fr?"Résumé de l’outil":"ملخص الأداة"}>
+        <div className="guide-title"><span>{fr?"Vous avez choisi":"اختيارك"}</span><strong>{fr?guide.frTitle:guide.arTitle}</strong></div>
+        <article><b>{fr?"À entrer":"شنو تدخل"}</b><p>{fr?guide.frInput:guide.arInput}</p></article>
+        <article><b>{fr?"Résultat":"شنو يعطيك"}</b><p>{fr?guide.frOutput:guide.arOutput}</p></article>
+        <article className="guide-tip"><b>{fr?"Conseil":"نصيحة"}</b><p>{fr?guide.frTip:guide.arTip}</p></article>
+      </section>
       {(network==="est"||network==="fst"||network==="ens")&&<AcademicSimulator network={network} lang={activeLang}/>}
       {(network==="ensa"||network==="ensam"||network==="health")&&<RankSimulator network={network} lang={activeLang}/>}
       <section className="next-list-bar"><div className="next-list-copy"><span>{fr?"PROCHAINE LISTE":"اللائحة الجاية"}</span><strong>{fr?"9 septembre 2026":"9 شتنبر 2026"}</strong>{announcement&&<small>{announcement}</small>}</div><div className="countdown" aria-label={fr?"Compte à rebours":"العد التنازلي"}>{countdown.done?<b>{fr?"La date est arrivée":"وصل الموعد"}</b>:<>{[[countdown.days,fr?"Jours":"يوم"],[countdown.hours,fr?"Heures":"ساعة"],[countdown.minutes,fr?"Min":"دقيقة"],[countdown.seconds,fr?"Sec":"ثانية"]].map(([number,label])=><div key={String(label)}><b>{String(number).padStart(2,"0")}</b><small>{label}</small></div>)}</>}</div><button className={`notify-button ${notifications}`} onClick={enableNotifications}>{notifications==="granted"?(fr?"✓ Alertes activées":"✓ الإشعارات خدامة"):notifications==="denied"?(fr?"Alertes bloquées":"الإشعارات مرفوضة"):(fr?"Activer les alertes":"فعّل الإشعارات")}</button></section>
