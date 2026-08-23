@@ -1,0 +1,16 @@
+metric,value
+initial_capacity,139
+initial_waitlist_length,2848
+vacancies_announced_2025_09_24,90
+late_admission_rows_2025_09_29,90
+unique_late_admitted_codes,89
+matched_to_initial_waitlist,89
+minimum_initial_waitlist_rank,24
+p10_initial_waitlist_rank,137
+p25_initial_waitlist_rank,324
+median_initial_waitlist_rank,680
+mean_initial_waitlist_rank,702.39
+p75_initial_waitlist_rank,1100
+p90_initial_waitlist_rank,1322
+maximum_initial_waitlist_rank,1451
+minimum_candidates_scanned_per_late_seat,16.12

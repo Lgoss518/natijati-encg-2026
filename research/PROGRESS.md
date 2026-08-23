@@ -96,6 +96,13 @@
 - La taille brute de la liste ne mesure pas le nombre de concurrents réels : les mêmes candidats figurent dans plusieurs filières et établissements. Exemple révélateur : malgré 2 848 personnes listées pour 139 places en Génie Informatique, 90 places étaient encore déclarées vacantes le 24/09. Cela confirme un taux massif de doublons, de choix préférés ailleurs et de non-confirmations.
 - Conséquence modèle : `rang / capacité` serait extrêmement pessimiste. Il faut estimer un taux d'activation du vivier par filière et par phase, puis dédupliquer/pondérer avec l'ordre de choix lorsque cette information existe. La liste complète sert de bassin de risque, pas de file d'attente pure.
 
+### Premier mouvement de rang reconstruit : EST Casablanca GI
+
+- La liste officielle initiale de Génie Informatique (2 848 candidats) a été croisée par Code Massar avec la liste officielle des admis publiée après l'appel de fin septembre. Les 90 lignes d'admis contiennent 89 Codes Massar uniques (un doublon dans le PDF); les 89 ont tous été retrouvés dans la liste initiale.
+- Les rangs initiaux des admis tardifs s'étendent de 24 à 1 451. Médiane : 680; percentile 75 : 1 100; percentile 90 : 1 322. Les statistiques non nominatives sont conservées dans `est_casablanca_gi_2025_late_admission_ranks.csv`.
+- Comme 90 places étaient annoncées vacantes le 24/09, la liste a dû atteindre au minimum le rang 1 451 pour produire environ 90 admissions, soit au moins 16,12 positions explorées par place tardive. Ce ratio est un minimum observé, pas une constante transférable automatiquement aux autres filières.
+- C'est une validation directe de l'hypothèse de forte attrition : un rang très supérieur à la capacité peut rester réellement compétitif. Pour le futur calculateur, la distribution observée des rangs admis est plus informative qu'un simple seuil binaire.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
