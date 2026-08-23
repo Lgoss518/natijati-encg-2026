@@ -8,6 +8,16 @@ type Entry = [number, number];
 type CandidateData = Record<string, Record<string, Entry>>;
 type School = { key:string; name:string; low:number; mid:number; high:number; seats:number };
 type Lang = "ar" | "fr";
+type Network = "encg" | "est" | "fst" | "ensa" | "ensam" | "health";
+
+const networks: Array<{ key: Network; icon: string; ar: string; fr: string; arHint: string; frHint: string }> = [
+  { key:"encg", icon:"▦", ar:"ENCG", fr:"ENCG", arHint:"التجارة والتسيير", frHint:"Commerce & gestion" },
+  { key:"ensa", icon:"△", ar:"ENSA", fr:"ENSA", arHint:"العلوم التطبيقية", frHint:"Sciences appliquées" },
+  { key:"ensam", icon:"◇", ar:"ENSAM", fr:"ENSAM", arHint:"الفنون والمهن", frHint:"Arts & métiers" },
+  { key:"health", icon:"＋", ar:"الصحة", fr:"Santé", arHint:"طب، صيدلة وأسنان", frHint:"Médecine, pharmacie, dentaire" },
+  { key:"fst", icon:"⌁", ar:"FST", fr:"FST", arHint:"العلوم والتقنيات", frHint:"Sciences & techniques" },
+  { key:"est", icon:"○", ar:"EST", fr:"EST", arHint:"التكنولوجيا", frHint:"Technologie" },
+];
 
 const schools: School[] = [
   {key:"kenitra",name:"ENCG القنيطرة",low:620,mid:660,high:720,seats:450},
@@ -88,7 +98,8 @@ const chance=(rank:number,cutoff:number,choice:number)=>clamp(100/(1+Math.exp((r
 
 export default function Home(){
   const [lang,setLang]=useState<Lang|null>(null);
-  const [network,setNetwork]=useState<"encg"|"est"|"fst"|"ensa"|"ensam"|"health">("encg");
+  const [entered,setEntered]=useState(false);
+  const [network,setNetwork]=useState<Network>("encg");
   const activeLang:Lang=lang||"ar"; const t=copy[activeLang]; const fr=activeLang==="fr";
   const [mode,setMode]=useState<"rank"|"massar"|"global">("rank"); const [schoolKey,setSchoolKey]=useState("kenitra");
   const [value,setValue]=useState("570"); const [choice,setChoice]=useState(1); const [data,setData]=useState<CandidateData|null>(null);
@@ -152,11 +163,11 @@ export default function Home(){
   const scores=useMemo(()=>result?{pessimistic:chance(result.rank,result.school.low,result.choice),central:chance(result.rank,result.school.mid,result.choice),optimistic:chance(result.rank,result.school.high,result.choice)}:null,[result]);
   const advice=scores?scores.central>=75?(fr?"Votre position est sérieuse et favorable. Gardez ce choix et suivez chaque itération sans manquer les délais d’inscription.":"وضعيتك مزيانة وجدّية. خليك محافظ على هاد الاختيار وتابع كل Iteration بلا ما تفوّت آجال التسجيل."):scores.central>=45?(fr?"Vous avez une chance réelle, mais elle dépend des désistements et des places vacantes. Gardez ce choix et préparez une alternative sûre.":"عندك فرصة حقيقية ولكن النتيجة مرتبطة بالانسحابات والمقاعد الشاغرة. احتافظ بالاختيار وحضّر بديل آمن."):(fr?"La chance reste limitée dans le scénario central. Gardez ce choix, mais sécurisez une alternative et suivez les listes jusqu’à la fin.":"الفرصة محدودة فالسيناريو العادي. ما تحيدش الاختيار، ولكن ضروري تعتمد على بديل وتراقب اللوائح حتى النهاية."):"";
 
-  return <main dir={fr?"ltr":"rtl"} className={`site-shell ${fr?"is-fr":"is-ar"} ${!lang?"is-locked":""} ${network!=="encg"?"network-academic":""}`}>
-    {!lang&&<div className="language-overlay" dir="ltr"><div className="language-card"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>BIENVENUE • مرحباً</span><h1>Choisissez votre langue</h1><p>اختار اللغة باش تبدا المحاكاة</p><div><button onClick={()=>setLang("ar")} dir="rtl"><b>العربية</b><small>استمر بالعربية</small><i>←</i></button><button onClick={()=>setLang("fr")}><b>Français</b><small>Continuer en français</small><i>→</i></button></div></div></div>}
-    <div className="site-content" aria-hidden={!lang}>
+  return <main dir={fr?"ltr":"rtl"} className={`site-shell ${fr?"is-fr":"is-ar"} ${!entered?"is-locked":""} ${network!=="encg"?"network-academic":""}`}>
+    {!entered&&<div className="language-overlay" dir={lang==="fr"?"ltr":"rtl"}>{!lang?<div className="language-card"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>BIENVENUE • مرحباً</span><h1>Choisissez votre langue</h1><p>اختار اللغة باش تبدا المحاكاة</p><div><button onClick={()=>setLang("ar")} dir="rtl"><b>العربية</b><small>استمر بالعربية</small><i>←</i></button><button onClick={()=>setLang("fr")} dir="ltr"><b>Français</b><small>Continuer en français</small><i>→</i></button></div></div>:<div className="language-card school-choice-card"><button className="onboarding-back" onClick={()=>setLang(null)} aria-label={fr?"Retour":"رجوع"}>{fr?"← Retour":"رجوع →"}</button><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>{fr?"ÉTAPE 2 SUR 2":"المرحلة 2 من 2"}</span><h1>{fr?"Quelle école vous intéresse ?":"شنو هي المدرسة اللي كتهتم بها؟"}</h1><p>{fr?"Le site s’ouvrira directement avec les informations et le simulateur adaptés.":"الموقع غادي يتحل مباشرة بالمعلومات والمحاكي المناسب لاختيارك."}</p><div className="school-choice-grid">{networks.map(item=><button key={item.key} onClick={()=>{setNetwork(item.key);setEntered(true)}}><i>{item.icon}</i><b>{fr?item.fr:item.ar}</b><small>{fr?item.frHint:item.arHint}</small><em>{fr?"Ouvrir →":"فتح ←"}</em></button>)}</div></div>}</div>}
+    <div className="site-content" aria-hidden={!entered}>
       <header className="nav"><a className="brand brand-image" href="#"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></a><nav><a href="#simulator">{t.navSim}</a><a href="#schools">{t.navSchools}</a><a href="#method">{t.navMethod}</a></nav><button className="language-switch" onClick={()=>setLang(fr?"ar":"fr")}>{fr?"العربية":"FR"}</button><div className="nav-note"><i/> {t.updated}</div></header>
-      <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{(["encg","est","fst","ensa","ensam","health"] as const).map(item=><button key={item} className={network===item?"active":""} onClick={()=>setNetwork(item)}><b>{item==="health"?(fr?"Santé":"الصحة"):item.toUpperCase()}</b><small>{item==="est"||item==="fst"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
+      <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{networks.map(item=><button key={item.key} className={network===item.key?"active":""} onClick={()=>setNetwork(item.key)}><b>{fr?item.fr:item.ar}</b><small>{item.key==="est"||item.key==="fst"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
       {(network==="est"||network==="fst")&&<AcademicSimulator network={network} lang={activeLang}/>}
       {(network==="ensa"||network==="ensam"||network==="health")&&<RankSimulator network={network} lang={activeLang}/>}
       <section className="next-list-bar"><div className="next-list-copy"><span>{fr?"PROCHAINE LISTE":"اللائحة الجاية"}</span><strong>{fr?"9 septembre 2026":"9 شتنبر 2026"}</strong>{announcement&&<small>{announcement}</small>}</div><div className="countdown" aria-label={fr?"Compte à rebours":"العد التنازلي"}>{countdown.done?<b>{fr?"La date est arrivée":"وصل الموعد"}</b>:<>{[[countdown.days,fr?"Jours":"يوم"],[countdown.hours,fr?"Heures":"ساعة"],[countdown.minutes,fr?"Min":"دقيقة"],[countdown.seconds,fr?"Sec":"ثانية"]].map(([number,label])=><div key={String(label)}><b>{String(number).padStart(2,"0")}</b><small>{label}</small></div>)}</>}</div><button className={`notify-button ${notifications}`} onClick={enableNotifications}>{notifications==="granted"?(fr?"✓ Alertes activées":"✓ الإشعارات خدامة"):notifications==="denied"?(fr?"Alertes bloquées":"الإشعارات مرفوضة"):(fr?"Activer les alertes":"فعّل الإشعارات")}</button></section>
