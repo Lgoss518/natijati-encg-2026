@@ -6,6 +6,8 @@ const labels:Record<string,string>={kenitra:"القنيطرة",settat:"سطات"
 export default function AdminDashboard({email}:{email:string}){
   const [model,setModel]=useState<Model|null>(null);const [state,setState]=useState("loading");
   const [visitors,setVisitors]=useState({total:0,online:0,today:0});
+  const activeNetworks=7;
+  const schoolCount=model?Object.keys(model.schools).length:0;
   useEffect(()=>{fetch("/api/model",{cache:"no-store"}).then(r=>r.json()).then(m=>{setModel(m);setState("ready")}).catch(()=>setState("error"))},[]);
   useEffect(()=>{const refresh=()=>fetch(`/api/visitors?t=${Date.now()}`,{cache:"no-store"}).then(r=>r.ok?r.json():Promise.reject()).then(setVisitors).catch(()=>{});refresh();const timer=setInterval(refresh,5000);return()=>clearInterval(timer)},[]);
   const updateSchool=(key:string,field:keyof SchoolModel,value:number)=>setModel(current=>current?{...current,schools:{...current.schools,[key]:{...current.schools[key],[field]:value}}}:current);
@@ -14,6 +16,7 @@ export default function AdminDashboard({email}:{email:string}){
   return <main className="admin-shell" dir="rtl">
     <header><div><span>ORIENTATION LGOSS</span><h1>لوحة إدارة التوقعات</h1><p>{email}</p></div><a href="/">← الموقع العام</a></header>
     <section className="visitor-stats"><article><i className="live-dot"/><div><small>متصلين دابا</small><strong>{visitors.online}</strong></div><span>مباشر</span></article><article><div><small>زوار اليوم</small><strong>{visitors.today}</strong></div><span>اليوم</span></article><article><div><small>مجموع الزوار</small><strong>{visitors.total}</strong></div><span>منذ الإطلاق</span></article></section>
+    <section className="admin-overview"><article><span>الشبكات المفعّلة</span><strong>{activeNetworks}</strong><p>ENCG, ENSA, ENSAM, Santé, ENS, EST, FST</p></article><article><span>مدن ENCG قابلة للتعديل</span><strong>{schoolCount}</strong><p>يمكنك تبديل الرتب المتشائمة، المركزية والمتفائلة مباشرة.</p></article><article><span>حالة المنصة</span><strong>جاهزة</strong><p>الموقع العمومي كيعرض آخر نسخة منشورة وكيحدّث المعطيات تلقائياً.</p></article></section>
     <section className="admin-settings"><label><span>تاريخ اللائحة المقبلة</span><input type="datetime-local" value={(model.next_list_date||"").slice(0,16)} onChange={e=>setModel({...model,next_list_date:`${e.target.value}:00+01:00`})}/></label><label><span>إعلان مختصر للطلبة</span><input value={model.announcement||""} placeholder="مثال: خرجات Iteration جديدة" onChange={e=>setModel({...model,announcement:e.target.value})}/></label></section>
     <section className="admin-table"><div className="admin-row head"><b>المدينة</b><b>متشائم</b><b>مركزي</b><b>متفائل</b><b>المقاعد</b></div>{Object.entries(model.schools).map(([key,s])=><div className="admin-row" key={key}><strong>{labels[key]||key}</strong>{(["low","mid","high","seats"] as const).map(field=><input key={field} type="number" value={s[field]} onChange={e=>updateSchool(key,field,Number(e.target.value))}/>)}</div>)}</section>
     <footer><div><span className={`save-state ${state}`}>{state==="saved"?"✓ تحفظات التغييرات":state==="saving"?"جاري الحفظ…":state.startsWith("error:")?state.slice(6):"النسخة: "+model.version}</span><small>الموقع العام كيراجع التحديثات كل 5 دقايق.</small></div><button onClick={save} disabled={state==="saving"}>حفظ ونشر التحديث</button></footer>
