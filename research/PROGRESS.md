@@ -103,6 +103,14 @@
 - Comme 90 places étaient annoncées vacantes le 24/09, la liste a dû atteindre au minimum le rang 1 451 pour produire environ 90 admissions, soit au moins 16,12 positions explorées par place tardive. Ce ratio est un minimum observé, pas une constante transférable automatiquement aux autres filières.
 - C'est une validation directe de l'hypothèse de forte attrition : un rang très supérieur à la capacité peut rester réellement compétitif. Pour le futur calculateur, la distribution observée des rangs admis est plus informative qu'un simple seuil binaire.
 
+### Extension du croisement Casablanca à GE et GP
+
+- Le même croisement par Code Massar a été réalisé pour Génie Electrique et Génie des Procédés. Les résultats comparables des trois filières sont regroupés dans `est_casablanca_2025_late_admission_rank_summary.csv`.
+- Génie Electrique : 75 lignes d'admis (74 codes uniques), toutes retrouvées; rang médian 860, rang 90e percentile 1 509 et rang maximal observé 1 667.
+- Génie des Procédés : 83 lignes (81 codes uniques), toutes retrouvées; rang médian 1 302, rang 90e percentile 1 700 et rang maximal 1 781.
+- Pour remplir les vacances annoncées, les listes ont donc atteint au minimum 16,12 positions par place en GI, 22,23 en GE et 21,46 en GP. La variation entre filières justifie un paramètre d'attrition spécifique plutôt qu'un multiplicateur EST unique.
+- Les doublons présents dans les PDF d'admis sont conservés comme anomalie source mais exclus des statistiques individuelles. Le calculateur ne devra jamais compter deux fois un même Code Massar.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
