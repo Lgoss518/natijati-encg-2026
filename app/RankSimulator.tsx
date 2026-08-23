@@ -23,7 +23,7 @@ function probability(rank: number, cutoff: number, choice: number) {
   return Math.max(3, Math.min(94, Math.round(100 / (1 + Math.exp((rank - cutoff) / Math.max(18, cutoff * .22))) + choiceBoost)));
 }
 
-function estimateScenarios(network: Network, item: Item, rank: number, choice: number) {
+function estimateScenarios(network: Network, item: Item) {
   if (network === "health") {
     const max = item.max_current_rank || item.candidates_remaining || 1;
     const firstShare = (item.choice_1 || 0) / Math.max(1, item.candidates_remaining || max);
@@ -62,7 +62,7 @@ export default function RankSimulator({ network, lang }: { network: Network; lan
 
   const choiceTotal = result?.item.choice_1 || 0;
   const relative = result?.item.max_current_rank ? Math.min(100, Math.round(100 * result.rank / result.item.max_current_rank)) : null;
-  const estimate = result ? estimateScenarios(network, result.item, result.rank, result.choice) : null;
+  const estimate = result ? estimateScenarios(network, result.item) : null;
   const scores = result && estimate ? estimate.horizons.map((cutoff) => probability(result.rank, cutoff, result.choice)) as [number, number, number] : null;
 
   return <section className="academic-simulator rank-simulator">
