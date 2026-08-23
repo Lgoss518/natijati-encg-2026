@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import AcademicSimulator from "./AcademicSimulator";
 import RankSimulator from "./RankSimulator";
@@ -152,7 +153,7 @@ export default function Home(){
 
   useEffect(()=>{
     if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").catch(()=>{});
-    setNotifications("Notification" in window?Notification.permission:"unsupported");
+    queueMicrotask(()=>setNotifications("Notification" in window?Notification.permission:"unsupported"));
   },[]);
   useEffect(()=>{
     let visitorId="";
@@ -205,7 +206,7 @@ export default function Home(){
   return <main dir={fr?"ltr":"rtl"} className={`site-shell ${fr?"is-fr":"is-ar"} ${!entered?"is-locked":""} ${network!=="encg"?"network-academic":""}`}>
     {!entered&&<div className="language-overlay" dir={lang==="fr"?"ltr":"rtl"}>{!lang?<div className="language-card"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>BIENVENUE • مرحباً</span><h1>Choisissez votre langue</h1><p>اختار اللغة باش تبدا المحاكاة</p><div><button onClick={()=>setLang("ar")} dir="rtl"><b>العربية</b><small>استمر بالعربية</small><i>←</i></button><button onClick={()=>setLang("fr")} dir="ltr"><b>Français</b><small>Continuer en français</small><i>→</i></button></div></div>:<div className="language-card school-choice-card"><button className="onboarding-back" onClick={()=>setLang(null)} aria-label={fr?"Retour":"رجوع"}>{fr?"← Retour":"رجوع →"}</button><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/><span>{fr?"ÉTAPE 2 SUR 2":"المرحلة 2 من 2"}</span><h1>{fr?"Quelle école vous intéresse ?":"شنو هي المدرسة اللي كتهتم بها؟"}</h1><p>{fr?"Le site s’ouvrira directement avec les informations et le simulateur adaptés.":"الموقع غادي يتحل مباشرة بالمعلومات والمحاكي المناسب لاختيارك."}</p><div className="school-choice-grid">{networks.map(item=><button key={item.key} onClick={()=>{setNetwork(item.key);setEntered(true)}}><i>{item.icon}</i><b>{fr?item.fr:item.ar}</b><small>{fr?item.frHint:item.arHint}</small><em>{fr?"Ouvrir →":"فتح ←"}</em></button>)}</div></div>}</div>}
     <div className="site-content" aria-hidden={!entered}>
-      <header className="nav"><a className="brand brand-image" href="#"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></a><nav><a href="#simulator">{t.navSim}</a><a href="#schools">{t.navSchools}</a><a href="#method">{t.navMethod}</a></nav><button className="language-switch" onClick={()=>setLang(fr?"ar":"fr")}>{fr?"العربية":"FR"}</button><div className="nav-note"><i/> {t.updated}</div></header>
+      <header className="nav"><Link className="brand brand-image" href="/"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></Link><nav><a href="#simulator">{t.navSim}</a><a href="#schools">{t.navSchools}</a><a href="#method">{t.navMethod}</a></nav><button className="language-switch" onClick={()=>setLang(fr?"ar":"fr")}>{fr?"العربية":"FR"}</button><div className="nav-note"><i/> {t.updated}</div></header>
       <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{networks.map(item=><button key={item.key} className={network===item.key?"active":""} onClick={()=>setNetwork(item.key)}><i>{item.icon}</i><b>{fr?item.fr:item.ar}</b><small>{item.key==="est"||item.key==="fst"||item.key==="ens"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
       <section className="quick-guide" aria-label={fr?"Résumé de l’outil":"ملخص الأداة"}>
         <div className="guide-title"><span>{fr?"Vous avez choisi":"اختيارك"}</span><strong>{fr?guide.frTitle:guide.arTitle}</strong></div>
@@ -238,10 +239,11 @@ export default function Home(){
         ["شنو معنى amélioration de choix؟","هي أنك كتدوز أوتوماتيكياً لمدرسة حاطها أحسن فاختياراتك ملي كيتفرغ فيها مقعد."],
         ["علاش شي لوائح كيتحركو أكثر؟","الحركة مرتبطة بالانسحابات، المقاعد اللي كتفرغ، وعدد الناس اللي كيفضلو مدينة أخرى."],
       ]).map(([q,a],i)=><details key={i}><summary>{q}<i>+</i></summary><p>{a}</p></details>)}</div></section>
-      <footer><a className="brand brand-image" href="#"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></a><p>{t.footer}</p><a href="#simulator">{t.try} ↑</a></footer>
+      <footer><Link className="brand brand-image" href="/"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></Link><p>{t.footer}</p><a href="#simulator">{t.try} ↑</a></footer>
     </div>
   </main>;
 }
+
 
 
 

@@ -52,7 +52,7 @@ export default function AcademicSimulator({ network, lang }: { network: Network;
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setCatalog(null); setResult(null); setError("");
+    queueMicrotask(() => { setCatalog(null); setResult(null); setError(""); });
     fetch(`/api/catalog?network=${network}`).then((response) => {
       if (!response.ok) throw new Error();
       return response.json();
@@ -68,7 +68,7 @@ export default function AcademicSimulator({ network, lang }: { network: Network;
   const programs = useMemo(() => catalog?.programs.filter((item) => item.city === city) || [], [catalog, city]);
 
   useEffect(() => {
-    if (programs.length && !programs.some((item) => item.program === program)) setProgram(programs[0].program);
+    if (programs.length && !programs.some((item) => item.program === program)) queueMicrotask(() => setProgram(programs[0].program));
   }, [programs, program]);
 
   function calculate(event: FormEvent) {

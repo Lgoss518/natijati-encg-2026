@@ -56,7 +56,7 @@ export default function RankSimulator({ network, lang }: { network: Network; lan
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setCatalog(null); setResult(null); setError("");
+    queueMicrotask(() => { setCatalog(null); setResult(null); setError(""); });
     fetch(`/api/rank-catalog?network=${network}`).then((response) => response.ok ? response.json() : Promise.reject()).then((data: Catalog) => {
       setCatalog(data); setCity(data.items[0]?.city || ""); setTrack(data.items[0]?.track || "");
     }).catch(() => setError(fr ? "Données momentanément indisponibles." : "المعطيات ما متوفراش مؤقتاً."));
@@ -64,7 +64,7 @@ export default function RankSimulator({ network, lang }: { network: Network; lan
 
   const cities = useMemo(() => [...new Set(catalog?.items.map((item) => item.city) || [])], [catalog]);
   const tracks = useMemo(() => catalog?.items.filter((item) => item.city === city) || [], [catalog, city]);
-  useEffect(() => { if (tracks.length && !tracks.some((item) => item.track === track)) setTrack(tracks[0].track); }, [tracks, track]);
+  useEffect(() => { if (tracks.length && !tracks.some((item) => item.track === track)) queueMicrotask(() => setTrack(tracks[0].track)); }, [tracks, track]);
 
   function analyze(event: FormEvent) {
     event.preventDefault(); setError("");

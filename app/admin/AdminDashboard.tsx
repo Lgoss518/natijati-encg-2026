@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect,useState } from "react";
 type SchoolModel={low:number;mid:number;high:number;seats:number};
 type Model={version:string;next_list_date?:string;announcement?:string;notification?:{id:string;body:string;created_at:string};schools:Record<string,SchoolModel>};
@@ -16,7 +17,7 @@ export default function AdminDashboard({email}:{email:string}){
   async function sendNotification(){if(!model||!notificationText.trim())return;setState("sending");const now=new Date().toISOString();const next={...model,version:now.slice(0,16).replace(/[-T:]/g,"."),announcement:notificationText.trim(),notification:{id:now,body:notificationText.trim(),created_at:now}};const response=await fetch("/api/model",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(next)});if(response.ok){setState("sent");setModel(next);setNotificationText("")}else{const body=await response.json().catch(()=>({error:"Erreur inconnue"}));setState(`error:${body.error||response.status}`)}}
   if(!model)return <main className="admin-loading">Chargement…</main>;
   return <main className="admin-shell" dir="rtl">
-    <header><div><span>ORIENTATION LGOSS</span><h1>لوحة إدارة التوقعات</h1><p>{email}</p></div><a href="/">← الموقع العام</a></header>
+    <header><div><span>ORIENTATION LGOSS</span><h1>لوحة إدارة التوقعات</h1><p>{email}</p></div><Link href="/">← الموقع العام</Link></header>
     <section className="visitor-stats"><article><i className="live-dot"/><div><small>متصلين دابا</small><strong>{visitors.online}</strong></div><span>مباشر</span></article><article><div><small>زوار اليوم</small><strong>{visitors.today}</strong></div><span>اليوم</span></article><article><div><small>مجموع الزوار</small><strong>{visitors.total}</strong></div><span>منذ الإطلاق</span></article></section>
     <section className="admin-overview"><article><span>الشبكات المفعّلة</span><strong>{activeNetworks}</strong><p>ENCG, ENSA, ENSAM, Santé, ENS, EST, FST</p></article><article><span>مدن ENCG قابلة للتعديل</span><strong>{schoolCount}</strong><p>يمكنك تبديل الرتب المتشائمة، المركزية والمتفائلة مباشرة.</p></article><article><span>حالة المنصة</span><strong>جاهزة</strong><p>الموقع العمومي كيعرض آخر نسخة منشورة وكيحدّث المعطيات تلقائياً.</p></article></section>
     <section className="admin-settings"><label><span>تاريخ اللائحة المقبلة</span><input type="datetime-local" value={(model.next_list_date||"").slice(0,16)} onChange={e=>setModel({...model,next_list_date:`${e.target.value}:00+01:00`})}/></label><label><span>إعلان مختصر للطلبة</span><input value={model.announcement||""} placeholder="مثال: خرجات Iteration جديدة" onChange={e=>setModel({...model,announcement:e.target.value})}/></label></section>
