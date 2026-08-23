@@ -50,6 +50,7 @@
 - Les deux pages complètes de l'annexe 2 sur la pondération ont été récupérées. Huit familles de filières ont été identifiées : management, informatique, électrique/industriel, mécanique, environnement/procédés/mines, agro/biologie, génie civil et instrumentation.
 - Les coefficients par série de bac et famille sont structurés dans `est_2026_weighting_groups.csv`. Exemples contrôlés : filières informatiques = 1,5 pour SMA/SMB et 1,3 pour PC; filières électriques/industrielles = 1,5 pour STE, 1,4 pour STM/SMA/SMB et 1,3 pour PC; filières agro/biologie = 1,4 pour PC et 1,2 pour SVT/agricole.
 - La prochaine sous-étape consiste à rattacher chaque intitulé exact des nombreuses filières EST à sa famille de pondération, puis à transcrire les places par filière et ville. Ce rattachement sera vérifié par somme contre la capacité de chaque établissement.
+- Une recherche ciblée des seuils 2025 n'a pas trouvé de tableau national officiel : Cursussup communique les propositions dans l'espace personnel et les établissements publient surtout les procédures/listes d'inscription. Il ne faudra donc pas présenter des « seuils nationaux » inventés. Les seuils historiques devront être reconstruits à partir des derniers admis/listes locales, ou alimentés par des résultats utilisateurs vérifiés.
 
 ## Contrôles à appliquer
 
