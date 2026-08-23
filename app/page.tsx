@@ -95,6 +95,7 @@ const copy = {
 const choiceWeights = [0,1,.6,.35,.15];
 const clamp=(n:number,min=4,max=96)=>Math.min(max,Math.max(min,Math.round(n)));
 const chance=(rank:number,cutoff:number,choice:number)=>clamp(100/(1+Math.exp((rank-cutoff)/Math.max(45,cutoff*.16)))+[0,5,2,-4,-8][choice]);
+const createVisitorId=()=>typeof globalThis.crypto?.randomUUID==="function"?globalThis.crypto.randomUUID():`visitor-${Date.now()}-${Math.random().toString(36).slice(2,12)}`;
 
 export default function Home(){
   const [lang,setLang]=useState<Lang|null>(null);
@@ -132,8 +133,11 @@ export default function Home(){
     setNotifications("Notification" in window?Notification.permission:"unsupported");
   },[]);
   useEffect(()=>{
-    let visitorId=localStorage.getItem("orientation-lgoss-visitor");
-    if(!visitorId){visitorId=crypto.randomUUID();localStorage.setItem("orientation-lgoss-visitor",visitorId)}
+    let visitorId="";
+    try{
+      visitorId=localStorage.getItem("orientation-lgoss-visitor")||"";
+      if(!visitorId){visitorId=createVisitorId();localStorage.setItem("orientation-lgoss-visitor",visitorId)}
+    }catch{visitorId=createVisitorId()}
     const ping=()=>fetch("/api/visit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({visitor_id:visitorId}),keepalive:true}).catch(()=>{});
     ping();const timer=setInterval(ping,30000);return()=>clearInterval(timer);
   },[]);
