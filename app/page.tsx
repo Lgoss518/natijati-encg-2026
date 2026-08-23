@@ -8,13 +8,14 @@ type Entry = [number, number];
 type CandidateData = Record<string, Record<string, Entry>>;
 type School = { key:string; name:string; low:number; mid:number; high:number; seats:number };
 type Lang = "ar" | "fr";
-type Network = "encg" | "est" | "fst" | "ensa" | "ensam" | "health";
+type Network = "encg" | "est" | "fst" | "ensa" | "ensam" | "health" | "ens";
 
 const networks: Array<{ key: Network; icon: string; ar: string; fr: string; arHint: string; frHint: string }> = [
   { key:"encg", icon:"▦", ar:"ENCG", fr:"ENCG", arHint:"التجارة والتسيير", frHint:"Commerce & gestion" },
   { key:"ensa", icon:"△", ar:"ENSA", fr:"ENSA", arHint:"العلوم التطبيقية", frHint:"Sciences appliquées" },
   { key:"ensam", icon:"◇", ar:"ENSAM", fr:"ENSAM", arHint:"الفنون والمهن", frHint:"Arts & métiers" },
   { key:"health", icon:"＋", ar:"الصحة", fr:"Santé", arHint:"طب، صيدلة وأسنان", frHint:"Médecine, pharmacie, dentaire" },
+  { key:"ens", icon:"□", ar:"ENS", fr:"ENS", arHint:"التربية والتكوين", frHint:"Éducation & enseignement" },
   { key:"fst", icon:"⌁", ar:"FST", fr:"FST", arHint:"العلوم والتقنيات", frHint:"Sciences & techniques" },
   { key:"est", icon:"○", ar:"EST", fr:"EST", arHint:"التكنولوجيا", frHint:"Technologie" },
 ];
@@ -172,7 +173,7 @@ export default function Home(){
     <div className="site-content" aria-hidden={!entered}>
       <header className="nav"><a className="brand brand-image" href="#"><img src="/orientation-lgoss-logo.png" alt="Orientation LGOSS"/></a><nav><a href="#simulator">{t.navSim}</a><a href="#schools">{t.navSchools}</a><a href="#method">{t.navMethod}</a></nav><button className="language-switch" onClick={()=>setLang(fr?"ar":"fr")}>{fr?"العربية":"FR"}</button><div className="nav-note"><i/> {t.updated}</div></header>
       <section className="network-picker" aria-label={fr?"Choisir le réseau":"اختار المؤسسة"}>{networks.map(item=><button key={item.key} className={network===item.key?"active":""} onClick={()=>setNetwork(item.key)}><b>{fr?item.fr:item.ar}</b><small>{item.key==="est"||item.key==="fst"?(fr?"Notes du bac":"نقط الباك"):(fr?"Rang & listes":"الرتبة واللوائح")}</small></button>)}</section>
-      {(network==="est"||network==="fst")&&<AcademicSimulator network={network} lang={activeLang}/>}
+      {(network==="est"||network==="fst"||network==="ens")&&<AcademicSimulator network={network} lang={activeLang}/>}
       {(network==="ensa"||network==="ensam"||network==="health")&&<RankSimulator network={network} lang={activeLang}/>}
       <section className="next-list-bar"><div className="next-list-copy"><span>{fr?"PROCHAINE LISTE":"اللائحة الجاية"}</span><strong>{fr?"9 septembre 2026":"9 شتنبر 2026"}</strong>{announcement&&<small>{announcement}</small>}</div><div className="countdown" aria-label={fr?"Compte à rebours":"العد التنازلي"}>{countdown.done?<b>{fr?"La date est arrivée":"وصل الموعد"}</b>:<>{[[countdown.days,fr?"Jours":"يوم"],[countdown.hours,fr?"Heures":"ساعة"],[countdown.minutes,fr?"Min":"دقيقة"],[countdown.seconds,fr?"Sec":"ثانية"]].map(([number,label])=><div key={String(label)}><b>{String(number).padStart(2,"0")}</b><small>{label}</small></div>)}</>}</div><button className={`notify-button ${notifications}`} onClick={enableNotifications}>{notifications==="granted"?(fr?"✓ Alertes activées":"✓ الإشعارات خدامة"):notifications==="denied"?(fr?"Alertes bloquées":"الإشعارات مرفوضة"):(fr?"Activer les alertes":"فعّل الإشعارات")}</button></section>
       <section className="hero"><div className="eyebrow">{t.eyebrow}</div><h1>{t.hero1}<br/><em>{t.hero2}</em></h1><p>{t.intro}</p><div className="trust"><span>13</span> {t.schoolsCount} <b>•</b> <span>+50 000</span> {t.lines} <b>•</b> {t.private}</div></section>

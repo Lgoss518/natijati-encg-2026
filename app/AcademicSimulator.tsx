@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Lang = "ar" | "fr";
-type Network = "fst" | "est";
+type Network = "fst" | "est" | "ens";
 type Program = { city: string; program: string; seats: number; group: string };
 type Catalog = { network: Network; campaign: string; programs: Program[]; weights: Record<string, number> };
 
@@ -22,6 +22,13 @@ const trackNames: Record<string, string> = {
   GESE: "Génie Électrique et Systèmes Embarqués", GC: "Génie Chimique",
 };
 
+function ensChance(score: number, seats: number) {
+  const capacityBoost = Math.min(4, Math.max(-5, (seats - 1150) / 170));
+  const preselection = Math.max(5, Math.min(96, Math.round(100 / (1 + Math.exp((18.5 - score) / 1.9)) + capacityBoost)));
+  const final = Math.max(4, Math.min(94, Math.round(preselection * .78 + 8)));
+  return { preselection, final };
+}
+
 export default function AcademicSimulator({ network, lang }: { network: Network; lang: Lang }) {
   const fr = lang === "fr";
   const [catalog, setCatalog] = useState<Catalog | null>(null);
@@ -30,7 +37,7 @@ export default function AcademicSimulator({ network, lang }: { network: Network;
   const [bac, setBac] = useState("PC");
   const [national, setNational] = useState("14");
   const [regional, setRegional] = useState("14");
-  const [result, setResult] = useState<{ base: number; weighted: number; coefficient: number; item: Program } | null>(null);
+  const [result, setResult] = useState<{ base: number; weighted: number; coefficient: number; item: Program; odds?: { preselection: number; final: number } } | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -66,14 +73,15 @@ export default function AcademicSimulator({ network, lang }: { network: Network;
       setError(fr ? "Cette série du bac n’est pas éligible à cette filière selon la grille publiée." : "هاد شعبة الباك ما مؤهلاش لهاد المسلك حسب شبكة الترجيح المنشورة."); return;
     }
     const base = .75 * n + .25 * r;
-    setResult({ base, weighted: base * coefficient, coefficient, item });
+    const weighted = base * coefficient;
+    setResult({ base, weighted, coefficient, item, odds: network === "ens" ? ensChance(weighted, item.seats) : undefined });
   }
 
   return <section className="academic-simulator" id="academic-simulator">
     <div className="academic-intro">
       <span>{network.toUpperCase()} • 2026/2027</span>
-      <h1>{fr ? "Calculez votre score officiel" : "حسب النقطة الرسمية ديالك"}</h1>
-      <p>{fr ? "La note, le coefficient et la capacité exacte sont vérifiés à partir de la note ministérielle. La probabilité sera activée après validation des seuils historiques." : "النقطة والمعامل وعدد المقاعد مأخوذين من المذكرة الوزارية. نسبة القبول غادي تتفعل من بعد ما نثبتو العتبات التاريخية."}</p>
+      <h1>{fr ? (network === "ens" ? "Estimez votre sélection ENS" : "Calculez votre score officiel") : (network === "ens" ? "قدّر فرصتك فـENS" : "حسب النقطة الرسمية ديالك")}</h1>
+      <p>{fr ? (network === "ens" ? "Le calcul suit la formule de présélection ENS/ESEF : 75% national, 25% régional, puis coefficient de pondération. Le final reste lié à l’oral." : "La note, le coefficient et la capacité exacte sont vérifiés à partir de la note ministérielle. La probabilité sera activée après validation des seuils historiques.") : (network === "ens" ? "الحساب تابع لصيغة الانتقاء ديال ENS/ESEF: 75% الوطني، 25% الجهوي، ثم معامل الترجيح. القبول النهائي كيبقى مرتبط بالشفوي." : "النقطة والمعامل وعدد المقاعد مأخوذين من المذكرة الوزارية. نسبة القبول غادي تتفعل من بعد ما نثبتو العتبات التاريخية.")}</p>
     </div>
     <div className="academic-card">
       <form onSubmit={calculate}>
@@ -90,9 +98,14 @@ export default function AcademicSimulator({ network, lang }: { network: Network;
         <div className="primary"><small>{fr ? "Score pondéré" : "النقطة بعد الترجيح"}</small><strong>{result.weighted.toFixed(2)}</strong></div>
         <div><small>{fr ? "Coefficient appliqué" : "المعامل المطبق"}</small><strong>× {result.coefficient.toFixed(1)}</strong></div>
         <div><small>{fr ? "Capacité officielle" : "عدد المقاعد الرسمي"}</small><strong>{result.item.seats}</strong></div>
+        {result.odds && <article className="academic-odds">
+          <span>{fr ? "PROBABILITÉS ENS/ESEF" : "نسب ENS/ESEF"}</span>
+          <div><b>{result.odds.preselection}%</b><small>{fr ? "présélection" : "الانتقاء الأولي"}</small></div>
+          <div><b>{result.odds.final}%</b><small>{fr ? "final estimé" : "النهائي المتوقع"}</small></div>
+        </article>}
         <article>
           <span>{fr ? "CONFIANCE EXPLORATOIRE" : "الثقة: استكشافية"}</span>
-          <p>{fr ? "Le calcul officiel est exact. Le pourcentage d’admission n’est pas encore affiché car le dernier seuil vérifié de cette ville-filière manque." : "حساب النقطة صحيح. ما عرضناش نسبة القبول دابا حيث آخر عتبة مؤكدة لهاد المدينة والمسلك مازال ما توفراتش."}</p>
+          <p>{fr ? (network === "ens" ? "Le score de présélection est calculé selon la formule publiée. Le pourcentage reste estimatif jusqu’à la publication des seuils et des listes ENS/ESEF 2026." : "Le calcul officiel est exact. Le pourcentage d’admission n’est pas encore affiché car le dernier seuil vérifié de cette ville-filière manque.") : (network === "ens" ? "النقطة محسوبة حسب الصيغة المنشورة. النسبة تقديرية حتى يخرجو عتبات ولوائح ENS/ESEF 2026." : "حساب النقطة صحيح. ما عرضناش نسبة القبول دابا حيث آخر عتبة مؤكدة لهاد المدينة والمسلك مازال ما توفراتش.")}</p>
         </article>
       </div>}
     </div>
