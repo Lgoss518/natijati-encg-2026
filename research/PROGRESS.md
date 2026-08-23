@@ -74,6 +74,14 @@
 - Le détail comparatif est enregistré dans `est_2025_2026_capacity_change.csv`. Ces variations devront agir comme variable explicative, mais ne suffisent pas à elles seules à fixer un seuil : la hausse peut concerner une filière différente de celle demandée par l'utilisateur.
 - La transcription 2025 par filière reste la prochaine vérification nécessaire afin de mesurer les hausses au niveau exact ville-filière, comme cela a déjà été fait pour les 185 combinaisons de 2026.
 
+### Vérité terrain EST 2025 : places encore vacantes après la phase nationale
+
+- La page récapitulative des résultats EST 2025 a livré 61 observations chiffrées de places vacantes par ville, filière et date. Elles sont structurées dans `est_2025_late_vacancies.csv` et ne doivent pas être confondues avec des capacités initiales ou des rangs de candidats.
+- Le 22/09/2025, Fès annonçait 485 places encore vacantes sur les 11 filières chiffrées (47,5 % de la capacité totale de l'établissement) et Salé 209 sur l'ensemble de ses 13 filières (23,0 %). Le 23/09, Essaouira annonçait 142 places (28,4 %); le 24/09, Casablanca 373 places (40,5 %).
+- Kénitra annonçait le 26/09 un total de 74 places sur cinq filières seulement, dont 24 en Technologies Agroalimentaires, puis encore 15 places dans cette même filière le 02/10. Fquih Ben Salah annonçait 91 places sur quatre filières le 27/09.
+- À Salé, le total chiffré passe de 209 places le 22/09 à 159 le 01/10, mais certaines filières peuvent recréer des vacances entre deux appels (désistement, amélioration ou non-inscription). On ne peut donc pas assimiler mécaniquement la différence entre deux snapshots au nombre d'admis.
+- Conclusion modèle : les listes complémentaires tardives constituent une composante majeure du mouvement EST. Une probabilité « finale » doit avoir un horizon explicite (prochaine liste, fin septembre ou clôture), et le modèle doit distinguer places initiales, places vacantes observées et nombre de candidats convoqués.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
