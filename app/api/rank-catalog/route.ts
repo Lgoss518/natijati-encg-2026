@@ -12,7 +12,7 @@ const staticCatalog = {
       source_url: "https://www.tawjihnet.net/resultats-definitifs-ensa-maroc-2026-2027/",
     },
     items: ["Agadir", "Al Hoceima", "Beni Mellal", "Berrechid", "El Jadida", "Fes", "Kenitra", "Khouribga", "Marrakech", "Oujda", "Safi", "Tanger", "Tetouan"].map((city) => ({
-      city, track: "Cycle préparatoire", status: "rank_input",
+      city, track: "Cycle préparatoire", status: city === "Safi" ? "official_milestone" : "official_calendar",
       ...(city === "Safi" ? { historical_phase: "Liste régionale n°5 (23 septembre 2025)", historical_max_rank: 300 } : {}),
     })),
   },
@@ -23,7 +23,9 @@ const staticCatalog = {
       historical: "Les archives 2025 confirment un mouvement entre les listes du 25 juillet et du 4 août, mais les fichiers complets ne sont plus téléchargeables.",
       source_url: "https://www.tawjihnet.net/resultats-definitifs-ensam-maroc-2026-2027/",
     },
-    items: ["Casablanca", "Meknes", "Rabat"].map((city) => ({ city, track: "Cycle préparatoire intégré", status: "rank_input" })),
+    items: ["Casablanca", "Meknes", "Rabat"].map((city) => ({
+      city, track: "Cycle préparatoire intégré", status: city === "Meknes" ? "official_waitlist" : "official_calendar",
+    })),
   },
 };
 
@@ -45,7 +47,15 @@ export async function GET(request: Request) {
       candidates_remaining: Number(row.candidates_remaining), max_current_rank: Number(row.max_current_rank),
       choice_1: Number(row.choice_1), choice_2: Number(row.choice_2), choice_3: Number(row.choice_3),
     }));
-    return Response.json({ network, campaign: "2026-2027", reference_date: "2026-08-04", next_result: null, items }, {
+    return Response.json({
+      network, campaign: "2026-2027", reference_date: "2026-08-04", next_result: null,
+      evidence: {
+        current: "Les listes d’attente du 4 août 2026 sont publiées pour médecine, pharmacie et dentaire.",
+        historical: "La comparaison principale / 4 août permet de mesurer le stock restant et la pression des choix.",
+        source_url: "https://www.tawjihnet.net/listes-dattente-medecine-pharmacie-dentaire-2026-2027/",
+      },
+      items,
+    }, {
       headers: { "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400" },
     });
   } catch { return Response.json({ error: "Catalog unavailable" }, { status: 500 }); }
