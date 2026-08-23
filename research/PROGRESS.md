@@ -66,6 +66,14 @@
 - Deux nouvelles implantations apparaissent dans la ventilation 2026 : Taourirt (100 places GI) et Guelmim (120 GI + 60 MSD). En parallèle, Settat GI passe de 460 à 440, Fès MSD de 150 à 100, tandis que Fès GMSI passe de 220 à 250 et GESE de 110 à 130.
 - Conséquence modèle : une amélioration globale uniforme serait incorrecte. L'effet capacité doit être appliqué au couple ville-filière; la pression pourrait diminuer davantage pour GI à Guelmim/Taourirt, tout en pouvant rester stable ou augmenter à Settat.
 
+### Comparaison des capacités EST 2025–2026
+
+- La note ministérielle EST 2025 (02/0283 du 25/07/2025) a été récupérée sous forme d'images et contrôlée visuellement. Les capacités des 20 établissements sont structurées dans `est_2025_capacity_by_city.csv`; leur somme est exactement 13 450.
+- En 2026, le réseau passe à 14 015 places, soit +565 places (+4,20 %). Deux nouveaux établissements apparaissent dans la ventilation : Al Hoceima (120) et Taounate (40).
+- À périmètre ancien, les plus fortes hausses sont Laayoune +100 (+17,86 %), Dakhla +70 (+15,91 %), Kelaat Sraghna +60 (+13,33 %), Kenitra +45 (+9,00 %), Safi +40 (+6,45 %) et Meknes +40 (+4,00 %). Guelmim gagne 20 places, Ouarzazate 20 et Beni Mellal 10; onze établissements restent stables.
+- Le détail comparatif est enregistré dans `est_2025_2026_capacity_change.csv`. Ces variations devront agir comme variable explicative, mais ne suffisent pas à elles seules à fixer un seuil : la hausse peut concerner une filière différente de celle demandée par l'utilisateur.
+- La transcription 2025 par filière reste la prochaine vérification nécessaire afin de mesurer les hausses au niveau exact ville-filière, comme cela a déjà été fait pour les 185 combinaisons de 2026.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
