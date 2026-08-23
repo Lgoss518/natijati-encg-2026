@@ -4,8 +4,8 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type Lang = "ar" | "fr";
 type Network = "ensa" | "ensam" | "health";
-type Item = { city: string; track: string; status: string; candidates_remaining?: number; max_current_rank?: number; choice_1?: number; choice_2?: number; choice_3?: number };
-type Catalog = { network: Network; campaign: string; reference_date: string; next_result: string | null; items: Item[] };
+type Item = { city: string; track: string; status: string; candidates_remaining?: number; max_current_rank?: number; choice_1?: number; choice_2?: number; choice_3?: number; historical_phase?: string; historical_max_rank?: number };
+type Catalog = { network: Network; campaign: string; reference_date: string; next_result: string | null; evidence?: { current: string; historical: string; source_url: string }; items: Item[] };
 
 const titles = { ensa: "ENSA", ensam: "ENSAM", health: "Médecine • Pharmacie • Dentaire" };
 
@@ -51,7 +51,9 @@ export default function RankSimulator({ network, lang }: { network: Network; lan
       <header><div><small>{fr ? "POSITION ANALYSÉE" : "الوضعية المحللة"}</small><h2>{result.item.city} • {result.item.track}</h2><p>Rang {result.rank} • Choix {result.choice}</p></div><span className="confidence">{result.item.status === "verified_snapshot" ? (fr ? "Liste vérifiée" : "لائحة مؤكدة") : (fr ? "Calibration" : "قيد المعايرة")}</span></header>
       {result.item.status === "verified_snapshot" ? <div className="rank-facts"><article><small>{fr ? "Candidats encore classés" : "المترشحين اللي باقين"}</small><strong>{result.item.candidates_remaining}</strong></article><article><small>{fr ? "Choix 1 dans la liste" : "Choix 1 فاللائحة"}</small><strong>{choiceTotal}</strong></article><article><small>{fr ? "Position relative" : "الموقع داخل اللائحة"}</small><strong>{relative}%</strong></article></div> : null}
       <div className="rank-guidance"><b>{fr ? "Probabilité en cours de calibration" : "النسبة مازال كتراجع"}</b><p>{fr ? "Votre rang est enregistré dans le bon contexte. Le pourcentage sera affiché dès que le mouvement entre deux phases comparables sera vérifié; aucune valeur arbitraire n’est utilisée." : "الرتبة تحطات فالسياق الصحيح. النسبة غادي تبان ملي نثبتو الحركة بين جوج لوائح متشابهة؛ ما كنستعملوش رقم عشوائي."}</p>{catalog?.next_result && <small>{fr ? `Prochaine consultation annoncée : ${catalog.next_result}` : `الموعد المعلن للنتيجة الجاية: ${catalog.next_result}`}</small>}</div>
+      {result.item.historical_max_rank && <div className="historical-proof"><span>{fr ? "REPÈRE HISTORIQUE VÉRIFIÉ" : "مرجع تاريخي مؤكد"}</span><strong>{fr ? `Safi a atteint au moins le rang ${result.item.historical_max_rank}` : `سافي وصلات على الأقل للرتبة ${result.item.historical_max_rank}`}</strong><p>{result.item.historical_phase}. {fr ? "Ce rang appartient à la liste régionale publiée par l’école et ne doit pas être comparé directement à un rang national Cursussup." : "هاد الرتبة ديال اللائحة الإقليمية اللي نشرتها المدرسة وما خاصهاش تتقارن مباشرة مع رتبة Cursussup الوطنية."}</p></div>}
     </div>}
+    {catalog?.evidence && <aside className="rank-evidence"><div><span>2026</span><p>{fr ? catalog.evidence.current : network === "ensa" ? "من بعد لائحة الانتظار 1 ديال 4 غشت 2026، معلن على مراجعة Cursussup نهار 9 شتنبر 2026." : "اللائحة الرئيسية، تحسين الاختيارات ولائحة الانتظار 1 مؤكدين فموسم 2026."}</p></div><div><span>2025</span><p>{fr ? catalog.evidence.historical : network === "ensa" ? "فـ2025 بقاو كاينين لوائح تكميلية فبعض مدارس ENSA حتى لشهر شتنبر." : "أرشيف 2025 كيأكد حركة بين 25 يوليوز و4 غشت، ولكن الملفات الكاملة ما بقاتش قابلة للتحميل."}</p></div><a href={catalog.evidence.source_url} target="_blank" rel="noreferrer">{fr ? "Voir la source ↗" : "شوف المصدر ↗"}</a></aside>}
     </div>
   </section>;
 }

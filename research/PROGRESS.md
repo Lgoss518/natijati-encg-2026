@@ -1,5 +1,12 @@
 # Avancement de l'étude
 
+## Vérification ENSA / ENSAM — 23 août 2026
+
+- La campagne ENSA 2026 confirme que les candidats encore en attente après la phase du 4 août doivent consulter Cursussup le 9 septembre 2026. Cette date est donc affichée pour ENSA seulement, sans la généraliser à ENSAM ou Santé.
+- ENSA Safi a publié en septembre 2025 une liste régionale d'attente 3 avec 25 admis, atteignant le rang 70, puis une liste régionale d'attente 5 avec 40 admis, atteignant le rang 300. Ces jalons sont vérifiés, mais les rangs régionaux ne sont pas directement comparables aux rangs nationaux Cursussup.
+- L'archive ENSAM 2025 décrit explicitement la comparaison entre les fichiers du 25 juillet et du 4 août : les candidats présents dans le premier et absents du second ont été admis. Les six fichiers Google Drive liés ne sont plus disponibles ou renvoient 404 ; aucun volume de mouvement par ville n'est donc publié dans le simulateur.
+- Règle produit : l'existence et le calendrier d'un mouvement peuvent être affichés ; une probabilité numérique reste masquée tant que deux instantanés comparables au niveau candidat ne peuvent pas être rétrovérifiés.
+
 ## 2026-08-23
 
 - Registre de sources créé pour ENCG, ENSA, ENSAM, FMP/FMD, FST et EST.
