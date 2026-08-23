@@ -33,6 +33,17 @@
 - ENSAM 2025 : listes d'attente initiales publiées le 25/07 pour Casablanca, Meknès et Rabat; première affectation/amélioration du 05 au 07/08.
 - FST/EST 2025 : phase principale le 01/09, phase 2 le 12/09, puis listes complémentaires locales. Les données ne sont pas homogènes entre établissements; le modèle devra être calibré par établissement et filière, sans appliquer un cutoff national unique.
 
+### FST / EST 2026 : données officielles structurées
+
+- Les 20 images des notes ministérielles 02/0136 (EST) et 02/0139 (FST), datées du 24/07/2026, ont été récupérées pour contrôle visuel.
+- Formule officielle commune : `score = (0,75 × note nationale + 0,25 × note régionale) × facteur de pondération`.
+- FST : 11 450 places en première année, contre 11 170 en 2025 et 10 750 en 2024. La ventilation exacte par ville et tronc commun est enregistrée dans `fst_2026_seats.csv`; les totaux par ligne et colonne ont été contrôlés.
+- FST : huit troncs communs (GB, GEG, GMSI, GP, MSD, GI, GESE et GC). Les facteurs officiels des principales séries générales et technologiques sont enregistrés dans `fst_2026_weighting.csv`. Les baccalauréats professionnels autorisés seront ajoutés séparément pour éviter de confondre les intitulés très spécifiques.
+- FST : le Génie Informatique représente 2 480 places, soit le plus grand contingent; GMSI est le plus petit tronc national avec 810 places. La disponibilité varie fortement selon la ville : un modèle national unique serait donc incorrect.
+- EST : 14 015 places en 2026, contre 13 450 en 2025 et 12 800 en 2024. La note ministérielle contient la ventilation par établissement et filière; sa transcription structurée est en cours.
+- Calendrier officiel FST/EST 2026 : liste principale le 31/08, inscriptions du 02 au 04/09, amélioration et liste d'attente 1 le 07/09, inscriptions de cette phase du 08 au 10/09.
+- ENSAM 2026 : la page publique confirme la liste principale du 27/07 et la liste d'attente 1 du 04/08, mais ne publie pas les PDF de rangs. Le rang saisi par l'utilisateur restera donc la donnée courante de référence; la calibration historique aura une incertitude supérieure à ENCG tant que les listes 2026 ne sont pas récupérées.
+
 ## Contrôles à appliquer
 
 - Vérifier que les rangs sont continus et que chaque Code Massar est unique.
