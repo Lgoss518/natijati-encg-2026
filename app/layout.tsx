@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://orientation-lgoss-2026.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://orientation-lgoss.vercel.app"),
   title: "ORIENTATION LGOSS | منصة تقدير فرص القبول",
   description: "منصة تفاعلية لتقدير فرص القبول في ENCG وENSA وENSAM وكليات الصحة وFST وEST.",
   openGraph: {
