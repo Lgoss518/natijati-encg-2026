@@ -3,6 +3,28 @@ import path from "node:path";
 
 type CsvRow = Record<string, string>;
 
+type Historical = {
+  historicalSeats: number;
+  lateVacancies: number;
+  vacancyRate: number;
+  observedPhases: number;
+  maxObservedRank?: number;
+  waitlistLength?: number;
+  evidence: "direct" | "city" | "network";
+};
+
+const normalized = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+const comparableProgram = (value: string) => normalized(value)
+  .replace(/industriels?/g, "").replace(/des /g, "").replace(/de l /g, "").replace(/et /g, "").trim();
+
+const sameProgram = (left: string, right: string) => {
+  const a = comparableProgram(left);
+  const b = comparableProgram(right);
+  return a === b || a.includes(b) || b.includes(a);
+};
+
 const ensPrograms = [
   "Enseignement primaire", "Langue arabe", "Langue française", "Langue anglaise",
   "Mathématiques", "Physique-Chimie", "Sciences de la Vie et de la Terre",
@@ -89,15 +111,41 @@ export async function GET(request: Request) {
     }
 
     if (network === "est") {
-      const [programRows, weightRows] = await Promise.all([
+      const [programRows, weightRows, vacancyRows, cityCapacityRows, casaDepthRows, casaRankRows] = await Promise.all([
         csv("est_2026_programs.csv"),
         csv("est_2026_weighting_groups.csv"),
+        csv("est_2025_late_vacancies.csv"),
+        csv("est_2025_capacity_by_city.csv"),
+        csv("est_casablanca_2025_waitlist_depth.csv"),
+        csv("est_casablanca_2025_late_admission_rank_summary.csv"),
       ]);
       const programs = programRows.map((row) => ({
         city: row.city,
         program: row.program,
         seats: Number(row.seats),
         group: row.weight_group,
+        historical: (() => {
+          const direct = vacancyRows.filter((item) => normalized(item.city) === normalized(row.city) && sameProgram(item.program, row.program));
+          const cityRows = vacancyRows.filter((item) => normalized(item.city) === normalized(row.city));
+          const depth = casaDepthRows.find((item) => sameProgram(item.program, row.program));
+          const rank = casaRankRows.find((item) => sameProgram(item.program, row.program));
+          const cityCapacity = Number(cityCapacityRows.find((item) => normalized(item.city) === normalized(row.city))?.seats || 0);
+          const used = direct.length ? direct : cityRows;
+          const lateVacancies = direct.length
+            ? Math.max(...direct.map((item) => Number(item.vacancies) || 0))
+            : cityRows.length ? Math.round(cityRows.reduce((sum, item) => sum + Number(item.vacancies || 0), 0) / cityRows.length) : 0;
+          const historicalSeats = Number(depth?.initial_seats || row.seats || 0);
+          const divisor = direct.length ? historicalSeats : Math.max(1, cityCapacity / Math.max(1, cityRows.length));
+          return {
+            historicalSeats,
+            lateVacancies,
+            vacancyRate: Math.min(1, lateVacancies / Math.max(1, divisor)),
+            observedPhases: new Set(used.map((item) => item.phase)).size,
+            maxObservedRank: rank ? Number(rank.max_rank) : undefined,
+            waitlistLength: depth ? Number(depth.initial_waitlist_length) : undefined,
+            evidence: direct.length || depth ? "direct" : cityRows.length ? "city" : "network",
+          } satisfies Historical;
+        })(),
       }));
       const weights = Object.fromEntries(
         weightRows.map((row) => [`${row.group}:${row.bac_track}`, Number(row.weight)]),
@@ -107,15 +155,31 @@ export async function GET(request: Request) {
       });
     }
 
-    const [seatRows, weightRows] = await Promise.all([
+    const [seatRows, weightRows, oldSeatRows, vacancyRows] = await Promise.all([
       csv("fst_2026_seats.csv"),
       csv("fst_2026_weighting.csv"),
+      csv("fst_2025_seats.csv"),
+      csv("fst_2025_late_vacancies.csv"),
     ]);
     const programs = seatRows
       .filter((row) => row.city !== "TOTAL")
       .flatMap((row) => Object.entries(row)
         .filter(([key, value]) => !["city", "total"].includes(key) && Number(value) > 0)
-        .map(([program, seats]) => ({ city: row.city, program, seats: Number(seats), group: program })));
+        .map(([program, seats]) => {
+          const direct = vacancyRows.filter((item) => normalized(item.city) === normalized(row.city) && item.track_code === program);
+          const cityRows = vacancyRows.filter((item) => normalized(item.city) === normalized(row.city));
+          const oldCity = oldSeatRows.find((item) => normalized(item.city) === normalized(row.city));
+          const historicalSeats = Number(oldCity?.[program] || seats);
+          const lateVacancies = direct.length ? Math.max(...direct.map((item) => Number(item.vacancies) || 0)) : 0;
+          const historical: Historical = {
+            historicalSeats,
+            lateVacancies,
+            vacancyRate: Math.min(1, lateVacancies / Math.max(1, historicalSeats)),
+            observedPhases: new Set(direct.map((item) => item.phase)).size,
+            evidence: direct.length ? "direct" : cityRows.length ? "city" : "network",
+          };
+          return { city: row.city, program, seats: Number(seats), group: program, historical };
+        }));
     const weights = Object.fromEntries(
       weightRows.map((row) => [`${row.program}:${row.bac_track}`, Number(row.weight)]),
     );
