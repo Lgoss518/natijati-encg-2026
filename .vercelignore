@@ -1,0 +1,10 @@
+.git
+.next
+node_modules
+research/raw
+drizzle
+scripts
+tests
+netlify.toml
+vite.config.ts
+drizzle.config.ts
