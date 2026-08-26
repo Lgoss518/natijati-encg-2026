@@ -25,6 +25,8 @@
 - Dentaire : 90 candidats à Fès, 170 à Rabat et 190 à Casablanca.
 - Les nombres ci-dessus représentent le stock restant en liste d'attente au 04/08, jamais le nombre de places ni le nombre d'admis.
 - Le fichier `medicine_2026_snapshot.csv` contient la ventilation complète par ville, filière et ordre de choix.
+- Le fichier `medicine_2026_candidates.csv` ajoute 6 907 identifiants Massar/CIN lisibles, avec ville, filière, rang et ordre de choix pour le snapshot du 04/08/2026. La recherche par Code Massar est ainsi disponible pour les 24 combinaisons publiées.
+- La calibration santé documente 5 campagnes (2022 à 2026) et 12 dates de publication. Les 20 PDF encore lisibles de la vague du 08/09/2023 ont été extraits; les anciens liens supprimés servent uniquement à documenter le calendrier et ne sont pas présentés comme observations numériques.
 
 ### Archives historiques et contraintes de récupération
 

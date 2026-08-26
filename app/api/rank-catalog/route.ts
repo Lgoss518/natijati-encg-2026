@@ -77,14 +77,25 @@ export async function GET(request: Request) {
       candidates_remaining: Number(row.candidates_remaining), max_current_rank: Number(row.max_current_rank),
       choice_1: Number(row.choice_1), choice_2: Number(row.choice_2), choice_3: Number(row.choice_3),
     }));
+    let candidates: Array<{ city: string; track: string; code: string; rank: number; choice: number }> = [];
+    try {
+      const candidateSource = await readFile(path.join(process.cwd(), "research", "medicine_2026_candidates.csv"), "utf8");
+      const candidateLines = candidateSource.trim().split(/\r?\n/);
+      const candidateHeaders = parseLine(candidateLines.shift() || "");
+      candidates = candidateLines.map((line) => Object.fromEntries(candidateHeaders.map((header, index) => [header, parseLine(line)[index] || ""]))).map((row) => ({
+        city: String(row.city), track: String(row.track), code: String(row.code).toUpperCase(), rank: Number(row.rank), choice: Number(row.choice) || 1,
+      }));
+    } catch {
+      candidates = [];
+    }
     return Response.json({
       network, campaign: "2026-2027", reference_date: "2026-08-04", next_result: null,
       evidence: {
         current: "Les listes d’attente du 4 août 2026 sont publiées pour médecine, pharmacie et dentaire.",
-        historical: "La comparaison principale / 4 août permet de mesurer le stock restant et la pression des choix.",
+        historical: "Calibration avec 5 campagnes Tawjihnet (2022–2026), 12 phases publiées et la composition détaillée des listes 2023 et 2026. Les campagnes récentes ont le poids le plus fort.",
         source_url: "https://www.tawjihnet.net/listes-dattente-medecine-pharmacie-dentaire-2026-2027/",
       },
-      items,
+      items, candidates,
     }, {
       headers: { "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400" },
     });

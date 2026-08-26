@@ -1,0 +1,6 @@
+campaign,published_phases,combinations,files_still_extractable,use_in_model
+2026-2027,2026-07-19|2026-08-04,24,48,current_snapshot_and_candidate_lookup
+2025-2026,2025-07-21|2025-08-04,21,0,calendar_and_structure_only
+2024-2025,2024-08-05|2024-09-13|2024-09-17,20,0,calendar_and_structure_only
+2023-2024,2023-07-24|2023-07-31|2023-08-04|2023-09-08,20,20,late_snapshot_composition
+2022-2023,2022-08-03,15,0,calendar_and_structure_only
