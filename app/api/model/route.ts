@@ -16,7 +16,12 @@ export async function GET() {
       headers: supabaseHeaders(), cache: "no-store",
     });
     const rows = await response.json();
-    return Response.json(rows?.[0]?.value || FALLBACK, { headers: { "Cache-Control": "no-store" } });
+    const remote = rows?.[0]?.value;
+    if (!remote) return Response.json(FALLBACK, { headers: { "Cache-Control": "no-store" } });
+    const active = String(remote.version || "") >= String(staticModel.version || "")
+      ? remote
+      : { ...staticModel, notification: remote.notification };
+    return Response.json(active, { headers: { "Cache-Control": "no-store" } });
   } catch { return Response.json(FALLBACK, { headers: { "Cache-Control": "no-store" } }); }
 }
 

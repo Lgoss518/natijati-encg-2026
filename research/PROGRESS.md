@@ -134,3 +134,10 @@
 - Séparer chaque ville et chaque filière (Médecine, Pharmacie, Dentaire).
 - Calculer le mouvement brut et le mouvement pondéré par ordre de choix.
 - Ne publier aucun cutoff de prochaine liste avant comparaison avec au moins une phase antérieure ou une campagne historique complète.
+# ENCG - snapshot du 5 septembre 2026
+
+- Les 13 PDF Cursussup du 05/09/2026 ont été extraits intégralement : 61 836 lignes ville-candidat et 17 793 candidats uniques.
+- La comparaison Code Massar avec le snapshot du 04/08/2026 identifie 8 568 disparitions de lignes dans les listes et 3 903 candidats uniques ayant disparu d'au moins une ville. Ces valeurs mesurent la mobilité dans chaque liste; elles ne sont pas des admissions propres à une école, car un candidat peut apparaître dans plusieurs ENCG et disparaître après une affectation ou une amélioration ailleurs.
+- 1 701 codes présents le 04/08 ne figurent plus dans aucune des 13 listes du 05/09. La liste seule ne permet pas de séparer une affectation en choix 1 d'un retrait ou d'une sortie de procédure.
+- Les rangs et choix du 05/09 remplacent désormais ceux du 04/08 dans la recherche publique Code Massar.
+- Les horizons du 09/09 ont été recalibrés en traduisant les anciens rangs cibles dans le nouveau classement, puis complétés par le mouvement national observé entre les itérations 2 et 3 de 2025, réparti selon les capacités et la composition actuelle des choix.

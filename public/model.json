@@ -1,21 +1,86 @@
 {
-  "version": "2026.08.21",
-  "updated_at": "2026-08-21T13:30:00+01:00",
+  "version": "2026.09.05",
+  "updated_at": "2026-09-05T18:00:00+01:00",
   "next_list_date": "2026-09-09T00:00:00+01:00",
-  "announcement": "",
+  "announcement": "تم إدماج لوائح ENCG الجديدة ديال 5 شتنبر وتحديث الرتب والتوقعات.",
   "schools": {
-    "kenitra": {"low": 620, "mid": 660, "high": 720, "seats": 450},
-    "settat": {"low": 550, "mid": 690, "high": 825, "seats": 550},
-    "casablanca": {"low": 450, "mid": 565, "high": 675, "seats": 580},
-    "tanger": {"low": 475, "mid": 595, "high": 710, "seats": 500},
-    "agadir": {"low": 400, "mid": 500, "high": 600, "seats": 500},
-    "fes": {"low": 395, "mid": 490, "high": 590, "seats": 430},
-    "marrakech": {"low": 270, "mid": 340, "high": 410, "seats": 360},
-    "oujda": {"low": 390, "mid": 490, "high": 590, "seats": 360},
-    "eljadida": {"low": 585, "mid": 730, "high": 875, "seats": 330},
-    "benimellal": {"low": 520, "mid": 650, "high": 780, "seats": 400},
-    "elhajeb": {"low": 245, "mid": 305, "high": 370, "seats": 200},
-    "alhoceima": {"low": 210, "mid": 265, "high": 315, "seats": 140},
-    "dakhla": {"low": 760, "mid": 950, "high": 1140, "seats": 300}
+    "kenitra": {
+      "low": 156,
+      "mid": 180,
+      "high": 212,
+      "seats": 450
+    },
+    "settat": {
+      "low": 82,
+      "mid": 199,
+      "high": 314,
+      "seats": 550
+    },
+    "casablanca": {
+      "low": 101,
+      "mid": 159,
+      "high": 227,
+      "seats": 580
+    },
+    "tanger": {
+      "low": 54,
+      "mid": 108,
+      "high": 167,
+      "seats": 500
+    },
+    "agadir": {
+      "low": 62,
+      "mid": 87,
+      "high": 155,
+      "seats": 500
+    },
+    "fes": {
+      "low": 26,
+      "mid": 37,
+      "high": 55,
+      "seats": 430
+    },
+    "marrakech": {
+      "low": 61,
+      "mid": 84,
+      "high": 106,
+      "seats": 360
+    },
+    "oujda": {
+      "low": 65,
+      "mid": 95,
+      "high": 159,
+      "seats": 360
+    },
+    "eljadida": {
+      "low": 118,
+      "mid": 154,
+      "high": 245,
+      "seats": 330
+    },
+    "benimellal": {
+      "low": 60,
+      "mid": 96,
+      "high": 149,
+      "seats": 400
+    },
+    "elhajeb": {
+      "low": 25,
+      "mid": 38,
+      "high": 62,
+      "seats": 200
+    },
+    "alhoceima": {
+      "low": 29,
+      "mid": 43,
+      "high": 70,
+      "seats": 140
+    },
+    "dakhla": {
+      "low": 128,
+      "mid": 205,
+      "high": 316,
+      "seats": 300
+    }
   }
 }
