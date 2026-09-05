@@ -168,7 +168,7 @@ export default function Home(){
 
   async function analyze(e:FormEvent){
     e.preventDefault(); setError(""); let all=data;
-    if(!all){all=await fetch("/candidates.json").then(r=>r.json());setData(all)}
+    if(!all){all=await fetch("/candidates.json?v=20260905",{cache:"no-store"}).then(r=>r.json());setData(all)}
     let rank=Number(value),actualChoice=choice,code:string|undefined;
     if(mode==="global"){
       code=value.trim().toUpperCase(); const matches=[];
