@@ -1,7 +1,7 @@
 import { isAdmin } from "../../../lib/admin-auth";
 import staticModel from "../../../public/model.json";
 
-const FALLBACK = { ...staticModel, next_list_date: "2026-09-09T00:00:00+01:00", announcement: "" };
+const FALLBACK = staticModel;
 const supabaseUrl = () => process.env.SUPABASE_URL || "";
 const supabaseKey = () => process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const supabaseHeaders = (): Record<string, string> => {

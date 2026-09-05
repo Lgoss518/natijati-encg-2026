@@ -118,7 +118,7 @@ export default function Home(){
   const [value,setValue]=useState("570"); const [choice,setChoice]=useState(1); const [data,setData]=useState<CandidateData|null>(null);
   const [result,setResult]=useState<{rank:number;choice:number;school:School;real:number;raw:number;first:number;code?:string}|null>(null);
   const [globalResults,setGlobalResults]=useState<Array<{rank:number;choice:number;school:School;real:number;raw:number;first:number;code:string}>>([]);
-  const [liveSchools,setLiveSchools]=useState(schools); const [modelVersion,setModelVersion]=useState("2026.08.04");
+  const [liveSchools,setLiveSchools]=useState(schools); const [modelVersion,setModelVersion]=useState("2026.09.09");
   const [announcement,setAnnouncement]=useState("");
   const [notifications,setNotifications]=useState<NotificationPermission|"unsupported">("default"); const versionRef=useRef(""); const notificationRef=useRef("");
   const [sortMode,setSortMode]=useState<"movement"|"easy"|"seats">("movement");
